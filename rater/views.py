@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rater.models import *
 
 
-@login_required
+# @login_required
 def index(request):
     return render(request, "rater/rater_index.html")
 

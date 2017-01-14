@@ -11,7 +11,8 @@
 
     <title>Memeconnect</title>
 
-    <link href="{% static 'lib/bulma/bulma.css' %}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" >
+    <link href="{% static 'lib/bootstrap/styles/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'styles/base.css' %}" rel="stylesheet">
     {% block styles %}{% endblock %}
 
@@ -27,7 +28,7 @@
     {% block pre_scripts %}{% endblock %}
     {% block content %}{% endblock %}
 
-    <script src="{% static 'scripts/app.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/scripts/bootstrap.js' %}"></script>
     {% block scripts %}{% endblock %}
     {% block post_scripts %}{% endblock %}
 </body>
