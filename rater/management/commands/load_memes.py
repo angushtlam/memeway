@@ -24,7 +24,7 @@ class Command(BaseCommand):
         pages = options['pages']
 
         # Iterate through all the pages
-        for page in range(49, pages+1):
+        for page in range(1, pages+1):
 
             print("***** PAGE %s *****" % page)
 
