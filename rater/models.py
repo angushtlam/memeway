@@ -59,23 +59,6 @@ class Meme(models.Model):
         return self.title
 
 
-class MemeImage(models.Model):
-
-    meme = models.ForeignKey(Meme, related_name="images", on_delete=CASCADE)
-
-    url = models.CharField(default="", max_length=256)
-
-    class Meta:
-        db_table = "meme_images"
-
-    def __str__(self):
-        return self.url
-
-    @property
-    def serialize(self):
-        return {"title": self.meme.title, "url": self.url}
-
-
 class MyUserManager(BaseUserManager):
     def create_user(self, username, first_name, last_name, password=None):
         """
@@ -182,13 +165,20 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 
-class ChosenMeme(models.Model):
+class MemeImage(models.Model):
 
-    meme = models.ForeignKey(Meme, related_name="picked_images", on_delete=CASCADE)
+    meme = models.ForeignKey(Meme, related_name="images", on_delete=CASCADE)
 
-    image_url = models.URLField(default="")
+    users_who_liked = models.ManyToManyField(User, related_name="liked_images")
 
-    user = models.ForeignKey(User, related_name="memes")
+    url = models.CharField(default="", max_length=256)
 
     class Meta:
-        db_table = "chosenMemes"
+        db_table = "meme_images"
+
+    def __str__(self):
+        return self.url
+
+    @property
+    def serialize(self):
+        return {"title": self.meme.title, "url": self.url, "image_id": self.id, "meme_id": self.meme.id}
