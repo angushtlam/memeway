@@ -15,14 +15,45 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 
 def index(request):
     return render(request, "index.html")
 
+
+def session(request):
+    if request.user.is_authenticated:
+        return redirect("rater:index")
+    return render(request, "signup.html")
+
+
+def signup_controller(request):
+    if request.method != "POST":
+        redirect("session")
+    pass
+
+
+def login_controller(request):
+    if request.method != "POST":
+        redirect("session")
+    pass
+
+
+@login_required
+def logout_controller(request):
+    logout(request)
+    return redirect("index")
+
+
 urlpatterns = [
     url(r'^$', index, name="index"),
+    url(r'^session$', session, name="session"),
+    url(r'^session/signup$', signup_controller, name="signup"),
+    url(r'^session/login$', login_controller, name="login"),
+    url(r'^logout$', login_controller, name="logout"),
     url(r'^rater/', include('rater.urls', namespace="rater")),
     url(r'^admin/', admin.site.urls),
 ]
