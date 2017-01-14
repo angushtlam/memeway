@@ -87,6 +87,10 @@ def random_meme(request):
             print("Deleted meme.")
 
     meme = random.choice(Meme.objects.all())
+
+    while len(meme.images.all()) == 0:
+        meme = random.choice(Meme.objects.all())
+
     image = random.choice(meme.images.all())
 
     return render(request, "random.html", {"url": image.url, 'pk': image.id, "title": meme.title})

@@ -1,22 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% load static from staticfiles %}
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+
+    <style>
+
+        html {
+            background: #c0b8bf;
+        }
+
+        body {
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .image {
+            display: block;
+            margin: 5vh auto auto;
+            max-height: 50vh;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        button {
+            display: inline;
+            margin: 3em auto 0;
+            padding: 2em;
+        }
+
+        .green {
+            background: #00c900;
+            color: #006900;
+            font-size: larger;
+        }
+
+        .red {
+            background: #eb0100;
+            color: #8a0100;
+            font-size: larger;
+        }
+
+        h1 {
+            font-family: 'Comic Sans MS', san-serif;
+        }
+
+    </style>
 </head>
 <body>
 
-<img src="{{ url }}">
+<h1 align="center">Rate this Meme</h1>
+<div>
+    <img alt="IF YOU SEE THIS, DOWNVOTE ME." class="image" src="{{ url }}">
+</div>
 
-<form method="post" action="{% url 'rater:random' %}">
-    {% csrf_token %}
-    <input type="hidden" value="{{ pk }}" name="pk">
-    <select name="quality">
-        <option value="0">Bad</option>
-        <option value="1" selected>Good</option>
-    </select>
-    <button type="submit">Rate</button>
-</form>
+<div>
+    <form method="post" action="{% url 'rater:random' %}">
+        {% csrf_token %}
+        <input type="hidden" value="{{ pk }}" name="pk">
+        <input type="hidden" name="quality" id="quality" value="1">
+        <button class="green" style="margin-right: 1em" type="button">Good!</button>
+        <button class="red" type="button">Bad!</button>
+    </form>
+</div>
+
+<script src="{% static 'lib/jquery/jquery-3.1.1.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("button").click(function() {
+            var class_ = $(this).attr('class').replace(".", "");
+
+            if (class_ == "green") {
+                $("#quality").val("1");
+                $("form").submit();
+            } else if (class_ == "red") {
+                $("#quality").val("0");
+                $("form").submit();
+            }
+        });
+
+    });
+</script>
 
 </body>
 </html>

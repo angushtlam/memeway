@@ -47,6 +47,9 @@ class Command(BaseCommand):
 
                 link = anchor["href"]
 
+                if Meme.objects.filter(title=name).first():
+                    continue
+
                 # Follow link to meme
                 url = "http://knowyourmeme.com%s" % link
                 meme_page = bs4.BeautifulSoup(urllib.request.urlopen(url).read(), "html.parser").find("section", class_="bodycopy")
