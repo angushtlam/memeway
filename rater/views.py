@@ -9,7 +9,7 @@ from rater.models import *
 
 @login_required
 def index(request):
-    return render(request, "discover/discover.html")
+    return render(request, "discover.html")
 
 
 @login_required
@@ -20,7 +20,7 @@ def welcome(request):
     images = []
     for meme in memes:
         images.append(random.choice(meme.images.all()))
-    return render(request, "rater/welcome.html", {"images": images})
+    return render(request, "welcome.html", {"images": images})
 
 
 @login_required
