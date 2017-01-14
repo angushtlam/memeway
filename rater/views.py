@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from rater.models import *
 
@@ -10,6 +10,17 @@ from rater.models import *
 @login_required
 def index(request):
     return render(request, "discover/discover.html")
+
+
+@login_required
+def welcome(request):
+    if len(request.user.memes.all()) > 0:
+        return redirect("rater:index")
+    memes = random.sample(list(Meme.objects.all()), 15)
+    images = []
+    for meme in memes:
+        images.append(random.choice(meme.images.all()))
+    return render(request, "rater/welcome.html", {"images": images})
 
 
 @login_required
@@ -21,6 +32,7 @@ def load_ten_random(request):
     return JsonResponse({"response": "ok", "message": "Successfully loaded da memes.", "memes": images}, safe=False)
 
 
+@login_required
 @csrf_exempt
 def save_meme_to_account(request):
 
