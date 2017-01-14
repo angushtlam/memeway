@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.checks import messages
 from django.shortcuts import render, redirect
 
 
@@ -37,9 +38,23 @@ def register_controller(request):
 
 
 def login_controller(request):
+    if request.user.is_authenticated:
+        return redirect("rater:index")
     if request.method != "POST":
         return render(request, "login.html")
-    pass
+    username = request.POST.get("username", "")
+    password = request.POST.get("password", "")
+    user = authenticate(username=username, password=password)
+
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        if user.memes.all() == 0:
+            return redirect("rater:welcome")
+        return redirect("rater:index")
+    else:
+        messages.error(request, "Invalid credentials! Try again.")
+        return redirect("login")
 
 
 @login_required
@@ -53,7 +68,7 @@ urlpatterns = [
     url(r'^session$', session, name="session"),
     url(r'^session/register$', register_controller, name="register"),
     url(r'^session/login$', login_controller, name="login"),
-    url(r'^logout$', login_controller, name="logout"),
+    url(r'^logout$', logout_controller, name="logout"),
     url(r'^discover/', include('rater.urls', namespace="rater")),
     url(r'^admin/', admin.site.urls),
 ]

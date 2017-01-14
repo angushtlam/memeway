@@ -12,18 +12,19 @@
             <h1>Log In</h1>
             <p>Welcome to the Internet, my friend, how can I help you?</p>
 
-            <form>
+            <form method="post">
+                {% csrf_token %}
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Username</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" placeholder="I Haven't Heard That Name In Years">
+                        <input class="form-control" type="text" name="username" placeholder="I Haven't Heard That Name In Years">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Password</label>
                     <div class="col-10">
-                        <input class="form-control" type="password" placeholder="hunter2">
+                        <input class="form-control" name="password" type="password" placeholder="hunter2">
                     </div>
                 </div>
 
