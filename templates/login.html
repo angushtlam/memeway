@@ -2,45 +2,56 @@
 {% load static from staticfiles %}
 
 {% block styles %}
-    <link href="{% static 'styles/register.css' %}" rel="stylesheet">
+<link href="{% static 'styles/register.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <h1 class="title is-1">Log In</h1>
-                <h2 class="subtitle is-4">Welcome to the Internet, my friend, how can I help you?</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-7">
+            <h1>Log In</h1>
+            <p>Welcome to the Internet, my friend, how can I help you?</p>
 
-                <label class="label">Username</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="I Haven't Heard That Name In Years">
-                </p>
-
-                <label class="label">Password</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="hunter2">
-                </p>
-                
-                <br />
-                <div class="control is-grouped">
-                    <p class="control">
-                        <button class="button is-black">Call Me Mr. Enter Cuz I'm Going In Deep</button>
-                    </p>
-                    <p class="control">
-                        <a class="button is-link" href="{% url 'index' %}">I want off Mr. Bones' Wild Ride</a>
-                    </p>
+            <form>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Username</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" placeholder="I Haven't Heard That Name In Years">
+                    </div>
                 </div>
-            </div>
-            <div class="column is-one-third">
-                <h3 class="title is-1">Register</h3>
-                <h4 class="subtitle is-4">Need an account?</h4>
-                <a class="button is-link" href="{% url 'session' %}">Register</a>
-            </div>
+
+                <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">Password</label>
+                    <div class="col-10">
+                        <input class="form-control" type="password" placeholder="hunter2">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2"></label>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"> Remember Me?
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Call Me Mr. Enter Cuz I'm Going In Deep</button>
+                        <a class="btn btn-secondary" href="{% url 'index' %}">I want off Mr. Bones' Wild Ride</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-md-5">
+            <h1>Register</h1>
+            <p>Need an account?</p>
+            <a class="btn btn-secondary" href="{% url 'session' %}">Register</a>
         </div>
     </div>
-</section>
+</div>
 {% endblock %}
 
 {% block scripts %}{% endblock %}

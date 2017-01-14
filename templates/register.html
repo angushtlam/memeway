@@ -6,64 +6,72 @@
 {% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <h1 class="title is-1">Register</h1>
-                <h2 class="subtitle is-4">Join the greatest social network since MySpace</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-7">
+            <h1>Register</h1>
+            <p>Join the greatest social network since MySpace.</p>
 
-                <label class="label">Username</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="This is the username you will be seen as online.">
-                </p>
+            <form>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Username</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" placeholder="This is the username you will be seen as online.">
+                    </div>
+                </div>
 
-                <label class="label">Password</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="We believe in you, so enter it correctly the first time.">
-                </p>
+                <div class="form-group row">
+                    <label for="example-password-input" class="col-2 col-form-label">Password</label>
+                    <div class="col-10">
+                        <input class="form-control" type="password" placeholder="We believe in you to enter it correctly the first time.">
+                    </div>
+                </div>
 
-                <label class="label">Email</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="We will not spam you with emails or share it with 3rd parties!">
-                </p>
-                
-                <label class="label">Gender</label>
-                <p class="control">
-                    <span class="select">
-                        <select>
-                            <option>Select</option>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Email</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" placeholder="We will not spam you with emails or share it with 3rd parties!">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Gender</label>
+                    <div class="col-10">
+                        <select class="form-control" id="exampleSelect1">
                             <option>Female</option>
                             <option>Male</option>
-                            <option>Bread</option>
+                            <option>Non-Binary</option>
+                            <option>Disclosed</option>
                         </select>
-                    </span>
-                </p>
-                
-                <br />
-
-                <p class="control">
-                    <label class="checkbox">
-                    <input type="checkbox"> Accept Terms of Service and Privacy Policy
-                    </label>
-                </p>
-                <div class="control is-grouped">
-                    <p class="control">
-                        <button class="button is-black">Serious Dog, Sign Me Up</button>
-                    </p>
-                    <p class="control">
-                        <a class="button is-link" href="{% url 'index' %}">I want off Mr. Bones' Wild Ride</a>
-                    </p>
+                    </div>
                 </div>
-            </div>
-            <div class="column is-one-third">
-                <h3 class="title is-1">Sign In</h3>
-                <h4 class="subtitle is-4">Already have an account?</h4>
-                <a class="button is-link" href="{% url 'login' %}">Log In</a>
-            </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2"></label>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"> I accept all Terms of Service and Privacy Policy.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Serious Dog, Sign Me Up!</button>
+                        <br />
+                        <a class="btn btn-secondary" href="{% url 'index' %}">I want off Mr. Bones' Wild Ride</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-md-5">
+            <h1>Log In</h1>
+            <p>Alright have an account?</p>
+            <a class="btn btn-secondary" href="{% url 'login' %}">Log In</a>
         </div>
     </div>
-</section>
+</div>
 {% endblock %}
 
 {% block scripts %}{% endblock %}

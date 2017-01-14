@@ -9,7 +9,7 @@ from rater.models import *
 
 @login_required
 def index(request):
-    return render(request, "rater/rater_index.html")
+    return render(request, "discover/discover.html")
 
 
 @login_required
