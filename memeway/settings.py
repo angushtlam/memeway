@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rater',
 ]
+
+AUTH_USER_MODEL = 'rater.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

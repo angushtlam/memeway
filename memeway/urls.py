@@ -54,6 +54,6 @@ urlpatterns = [
     url(r'^session/register$', register_controller, name="register"),
     url(r'^session/login$', login_controller, name="login"),
     url(r'^logout$', login_controller, name="logout"),
-    url(r'^rater/', include('rater.urls', namespace="rater")),
+    url(r'^discover/', include('rater.urls', namespace="rater")),
     url(r'^admin/', admin.site.urls),
 ]

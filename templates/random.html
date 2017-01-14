@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<img src="{{ url }}">
+
+<form method="post" action="{% url 'rater:random' %}">
+    {% csrf_token %}
+    <input type="hidden" value="{{ pk }}" name="pk">
+    <select name="quality">
+        <option value="0">Bad</option>
+        <option value="1" selected>Good</option>
+    </select>
+    <button type="submit">Rate</button>
+</form>
+
+</body>
+</html>
