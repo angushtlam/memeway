@@ -21,6 +21,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        BLOCKED = ["shantae"]
+
         pages = options['pages']
 
         # Iterate through all the pages
@@ -47,7 +49,7 @@ class Command(BaseCommand):
 
                 link = anchor["href"]
 
-                if Meme.objects.filter(title=name).first():
+                if Meme.objects.filter(title=name).first() or name.lower() in BLOCKED:
                     continue
 
                 # Follow link to meme
