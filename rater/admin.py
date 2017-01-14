@@ -69,6 +69,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name')}),
+        ("Memes", {'fields': ("memes",)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -98,10 +99,11 @@ class TagAdmin(admin.ModelAdmin):
 class MemeImageAdmin(admin.TabularInline):
     model = MemeImage
     extra = 0
+    readonly_fields = ("id",)
 
 
 @admin.register(Meme)
 class MemeAdmin(admin.ModelAdmin):
     list_display = ("title", "number_picked")
-    search_fields = ("title",)
+    search_fields = ("title", "id")
     inlines = [MemeImageAdmin,]
