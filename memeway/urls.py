@@ -27,10 +27,10 @@ def index(request):
 def session(request):
     if request.user.is_authenticated:
         return redirect("rater:index")
-    return render(request, "signup.html")
+    return render(request, "register.html")
 
 
-def signup_controller(request):
+def register_controller(request):
     if request.method != "POST":
         redirect("session")
     pass
@@ -38,7 +38,7 @@ def signup_controller(request):
 
 def login_controller(request):
     if request.method != "POST":
-        redirect("session")
+        return render(request, "login.html")
     pass
 
 
@@ -51,7 +51,7 @@ def logout_controller(request):
 urlpatterns = [
     url(r'^$', index, name="index"),
     url(r'^session$', session, name="session"),
-    url(r'^session/signup$', signup_controller, name="signup"),
+    url(r'^session/register$', register_controller, name="register"),
     url(r'^session/login$', login_controller, name="login"),
     url(r'^logout$', login_controller, name="logout"),
     url(r'^rater/', include('rater.urls', namespace="rater")),

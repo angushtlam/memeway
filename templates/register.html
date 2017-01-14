@@ -1,0 +1,69 @@
+{% extends 'components/base.html' %}
+{% load static from staticfiles %}
+
+{% block styles %}
+    <link href="{% static 'styles/register.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title is-1">Register</h1>
+                <h2 class="subtitle is-4">Join the greatest social network since MySpace</h2>
+
+                <label class="label">Username</label>
+                <p class="control">
+                    <input class="input" type="text" placeholder="This is the username you will be seen as online.">
+                </p>
+
+                <label class="label">Password</label>
+                <p class="control">
+                    <input class="input" type="text" placeholder="We believe in you, so enter it correctly the first time.">
+                </p>
+
+                <label class="label">Email</label>
+                <p class="control">
+                    <input class="input" type="text" placeholder="We will not spam you with emails or share it with 3rd parties!">
+                </p>
+                
+                <label class="label">Gender</label>
+                <p class="control">
+                    <span class="select">
+                        <select>
+                            <option>Select</option>
+                            <option>Female</option>
+                            <option>Male</option>
+                            <option>Bread</option>
+                        </select>
+                    </span>
+                </p>
+                
+                <br />
+
+                <p class="control">
+                    <label class="checkbox">
+                    <input type="checkbox"> Accept Terms of Service and Privacy Policy
+                    </label>
+                </p>
+                <div class="control is-grouped">
+                    <p class="control">
+                        <button class="button is-black">Serious Dog, Sign Me Up</button>
+                    </p>
+                    <p class="control">
+                        <a class="button is-link" href="{% url 'index' %}">I want off Mr. Bones' Wild Ride</a>
+                    </p>
+                </div>
+            </div>
+            <div class="column is-one-third">
+                <h3 class="title is-1">Sign In</h3>
+                <h4 class="subtitle is-4">Already have an account?</h4>
+                <a class="button is-link" href="{% url 'login' %}">Log In</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}{% endblock %}

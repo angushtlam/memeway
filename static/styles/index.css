@@ -1,0 +1,19 @@
+.hero {
+	background-color: #111;
+	/*background: #111 url('/static/assets/test.jpg') center center no-repeat;*/
+	background-size: cover;
+}
+
+.hero-body {
+	background: url('/static/assets/util/antipixel_overlay.png') repeat;
+}
+
+.title {
+	color: #fff;
+	font-size: 90px !important;
+}
+
+.subtitle {
+	color: #fff;
+	font-family: 'Comic Sans MS', san-serif;
+}

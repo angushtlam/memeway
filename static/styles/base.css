@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Lily+Script+One');
+
+html,
+body {
+	font-family: 'Comic Sans MS', san-serif;
+}
+
+.title {
+	font-family: 'Lily Script One', serif;
+}
+
+.title.is-1 {
+	font-size: 80px !important;
+}
