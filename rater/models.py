@@ -49,7 +49,10 @@ class Meme(models.Model):
 
     @property
     def number_picked(self):
-        return len(self.picked_images.all())
+        count = 0
+        for image in self.images.all():
+            count += len(image.users_who_liked.all())
+        return count
 
     @property
     def get_random_url(self):
@@ -94,6 +97,23 @@ class MyUserManager(BaseUserManager):
         return user
 
 
+class MemeImage(models.Model):
+
+    meme = models.ForeignKey(Meme, related_name="images", on_delete=CASCADE)
+
+    url = models.CharField(default="", max_length=256)
+
+    class Meta:
+        db_table = "meme_images"
+
+    def __str__(self):
+        return "%s Image: %s" % (self.meme.title, self.id)
+
+    @property
+    def serialize(self):
+        return {"title": self.meme.title, "url": self.url, "image_id": self.id, "meme_id": self.meme.id}
+
+
 class User(AbstractBaseUser):
 
     username = models.CharField(
@@ -116,6 +136,8 @@ class User(AbstractBaseUser):
     last_name = models.CharField(default="", max_length=128, help_text="The user's last name.")
 
     # memes = ForeignKey(ChosenMeme)
+
+    memes = models.ManyToManyField(MemeImage, related_name="users_who_liked")
 
     liked = models.ManyToManyField("self", blank=True, related_name="liked_me")
 
@@ -163,22 +185,3 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-
-
-class MemeImage(models.Model):
-
-    meme = models.ForeignKey(Meme, related_name="images", on_delete=CASCADE)
-
-    users_who_liked = models.ManyToManyField(User, related_name="liked_images")
-
-    url = models.CharField(default="", max_length=256)
-
-    class Meta:
-        db_table = "meme_images"
-
-    def __str__(self):
-        return self.url
-
-    @property
-    def serialize(self):
-        return {"title": self.meme.title, "url": self.url, "image_id": self.id, "meme_id": self.meme.id}
