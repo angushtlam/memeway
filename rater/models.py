@@ -71,6 +71,10 @@ class MemeImage(models.Model):
     def __str__(self):
         return self.url
 
+    @property
+    def serialize(self):
+        return {"title": self.meme.title, "url": self.url}
+
 
 class MyUserManager(BaseUserManager):
     def create_user(self, username, first_name, last_name, password=None):
