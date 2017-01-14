@@ -55,11 +55,6 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class ChosenMemeInline(admin.TabularInline):
-    model = ChosenMeme
-    extra = 0
-
-
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -87,8 +82,6 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('username', 'last_name')
     ordering = ('username',)
     filter_horizontal = ()
-
-    inlines = [ChosenMemeInline,]
 
 
 # ... and, since we're not using Django's built-in permissions,
