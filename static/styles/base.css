@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Lily+Script+One');
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Lily Script One', serif;
+}
+
+p, span {
+	font-family: 'Comic Sans MS', san-serif;
+}
+
+.button {
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #fff;
+	font-family: 'Comic Sans MS', san-serif;
+	font-size: 18px !important;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin: 0 5px !important;
+
+}

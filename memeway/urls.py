@@ -27,7 +27,7 @@ def index(request):
 def session(request):
     if request.user.is_authenticated:
         return redirect("rater:index")
-    return render(request, "signup.html")
+    return render(request, "register.html")
 
 
 def signup_controller(request):

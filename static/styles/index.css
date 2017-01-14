@@ -1,0 +1,40 @@
+.hero-wrapper {
+	background: #111 url('/static/assets/test.jpg') center center no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+
+.hero {
+	align-items: center;
+	background: url('/static/assets/util/antipixel_overlay.png') repeat;
+	display: flex;
+	height: 100%;
+}
+
+.hero-content {
+	width: 100%;
+}
+
+.hero-title {
+	text-align: center;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+.hero-title .title {
+	color: #fff;
+	/*font-family: 'Impact', serif;*/
+	font-size: 100px;
+	margin-bottom: 0;
+	/*text-transform: uppercase;*/
+}
+
+.hero-title .subtitle {
+	color: #fff;
+	font-size: 28px;
+	margin-bottom: 0;
+}
+
+.hero-content .button-group {
+	text-align: center;
+}
