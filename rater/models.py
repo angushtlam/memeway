@@ -49,7 +49,10 @@ class Meme(models.Model):
 
     @property
     def number_picked(self):
-        return len(self.picked_images.all())
+        count = 0
+        for image in self.images.all():
+            count += len(image.users_who_liked.all())
+        return count
 
     @property
     def get_random_url(self):
