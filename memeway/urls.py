@@ -38,7 +38,7 @@ def signup_controller(request):
 
 def login_controller(request):
     if request.method != "POST":
-        redirect("session")
+        return render(request, "login.html")
     pass
 
 

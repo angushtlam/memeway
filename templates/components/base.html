@@ -11,7 +11,7 @@
 
     <title>Memeconnect</title>
 
-    <link href="{% static 'lib/foundation/styles/foundation.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/bulma/bulma.css' %}" rel="stylesheet">
     <link href="{% static 'styles/base.css' %}" rel="stylesheet">
     {% block styles %}{% endblock %}
 
@@ -27,9 +27,6 @@
     {% block pre_scripts %}{% endblock %}
     {% block content %}{% endblock %}
 
-    <script src="{% static 'lib/foundation/scripts/jquery.js' %}"></script>
-    <script src="{% static 'lib/foundation/scripts/what-input.js' %}"></script>
-    <script src="{% static 'lib/foundation/scripts/foundation.js' %}"></script>
     <script src="{% static 'scripts/app.js' %}"></script>
     {% block scripts %}{% endblock %}
     {% block post_scripts %}{% endblock %}
