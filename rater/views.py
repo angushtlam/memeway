@@ -41,7 +41,7 @@ def welcome(request):
     images = []
     for meme in memes:
         images.append(random.choice(meme.images.all()))
-    return render(request, "welcome.html", {"images": images})
+    return render(request, "discover/welcome.html", {"images": images})
 
 
 @login_required
