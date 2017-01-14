@@ -1,11 +1,19 @@
 .hero {
-	background-color: #111;
-	/*background: #111 url('/static/assets/test.jpg') center center no-repeat;*/
+	background: #111 url('/static/assets/test.jpg') center center no-repeat;
 	background-size: cover;
+	height: 100%;
 }
 
 .hero-body {
+	align-items: center;
 	background: url('/static/assets/util/antipixel_overlay.png') repeat;
+	display: flex;
+	height: 100%;
+}
+
+.title-block {
+	text-align: center;
+	width: 100%;
 }
 
 .title {

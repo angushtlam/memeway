@@ -6,15 +6,14 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero is-fullheight">
+<div class="hero">
     <div class="hero-body">
-        <div class="container">
-            <h1 class="title is-1">Memeconnect</h1>
-            <h2 class="subtitle is-3">Invasively putting memes into your friendships.</h2>
-            <div class="block">
-                <a class="button is-white is-outlined is-large" href="{% url 'login' %}">Continue the Connections</a>
-                <a class="button is-white is-outlined is-large" href="{% url 'register' %}">Join the Fun</a>
-            </div>
+        <div class="title-block">
+            <h1 class="title">Memeconnect</h1>
+            <h2 class="subtitle">Invasively putting memes into your friendships.</h2>
+
+            <a class="button" href="{% url 'login' %}">Continue the Connections</a>
+            <a class="button" href="{% url 'session' %}">Join the Fun</a>
         </div>
     </div>
 </section>
