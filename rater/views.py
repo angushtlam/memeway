@@ -9,7 +9,29 @@ from rater.models import *
 
 @login_required
 def index(request):
-    return render(request, "discover/discover.html")
+
+    if len(request.user.memes.all()) > 0:
+        meme_to_compare = random.choice(request.user.memes.all())
+    else:
+        meme_to_compare = random.choice(Meme.objects.all())
+
+    tag_to_compare = random.choice(meme_to_compare.tags.all())
+
+    meme_to_use = random.choice(tag_to_compare.memes.all())
+
+    image_to_use = random.choice(meme_to_use.images.all())
+
+    if len(image_to_use.users_who_liked.all()) > 0:
+        account = random.choice(image_to_use.users_who_liked.all())
+    else:
+        account = random.choice(User.objects.all())
+    while account != request.user:
+        if len(image_to_use.users_who_liked.all()) > 0:
+            account = random.choice(image_to_use.users_who_liked.all())
+        else:
+            account = random.choice(User.objects.all())
+
+    return render(request, "discover/discover.html", {"account": account})
 
 
 @login_required
@@ -63,8 +85,9 @@ def random_meme(request):
         meme_img = MemeImage.objects.filter(id=request.POST.get("pk", 0)).first()
         if int(request.POST.get("quality", 1)) == 0:
             meme_img.delete()
+            print("Deleted meme.")
 
     meme = random.choice(Meme.objects.all())
     image = random.choice(meme.images.all())
 
-    return render(request, "random.html", {"url": image.url, 'pk': image.id})
+    return render(request, "random.html", {"url": image.url, 'pk': image.id, "title": meme.title})
