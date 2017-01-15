@@ -20,6 +20,12 @@ h1, h2, h3, h4, h5, h6 {
 	display: inline-block;
 	height: 75px;
 	width: 75px;
+	opacity: 0.75;
+	transition:all 0.3s ease;
+}
+
+.fab:hover {
+  opacity: 1;
 }
 
 .fab span {
@@ -54,6 +60,18 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: 50px;
 		padding-top: 24px;
 	}
+}
+
+.fab-like {
+	background-color: #ff4489;
+}
+
+.fab-pass {
+	background-color: #415e96;
+}
+
+.fab-next {
+	background-color: #f1be47;
 }
 
 /* Buttons */
@@ -94,6 +112,10 @@ a:hover {
 }
 
 /* Forms */
+input,
+textarea {
+	padding: 15px !important;
+}
 
 .emoji {
   width: 1.5em;
