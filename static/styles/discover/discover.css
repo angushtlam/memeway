@@ -3,11 +3,7 @@ body {
 }
 
 .user-profile {
-	background-color: #fff;
-	/*height: 100%;*/
 	padding: 15px;
-	/*position: fixed;*/
-	/*width: 33.33%;*/
 }
 
 .nav-top {
@@ -15,9 +11,7 @@ body {
 }
 
 .user-memes {
-	/*float: right;*/
 	padding: 0 15px;
-	/*width: 66.66%;*/
 }
 
 @media only screen and (min-width: 1132px) {
@@ -25,6 +19,14 @@ body {
 		height: 100%;
 		position: fixed;
 		width: 33.33%;
+	}
+
+	.user-profile-body {
+		background-color: #fff;
+		border-radius: 3px;
+		position: relative;
+		height: 100%;
+		padding: 30px;
 	}
 
 	.user-memes {
@@ -66,6 +68,7 @@ body {
 /* FABs */
 .fabs {
 	text-align: center;
+	right: 0;
 }
 
 .fab {
@@ -80,7 +83,7 @@ body {
 	}
 
 	.fab {
-		margin: 0 30px;
+		/*margin: 0 30px;*/
 	}
 }
 
@@ -101,4 +104,13 @@ body {
 
 .fab-continue.disabled {
 	display: none;
+}
+
+/* Top Nav */
+.btn-group-wide {
+	width: 100%;
+}
+
+.btn-group-wide .btn {
+	width: 25%;
 }
