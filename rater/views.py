@@ -202,3 +202,27 @@ def my_account(request):
     return render(request, "discover/my_account.html", {"account": request.user})
 
 
+@login_required
+def delete_meme_from_account(request):
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"response": "error", "message": "Dude, don't impersonate people."})
+
+    if request.method != "POST":
+        return JsonResponse({"response": "error", "message": "You don' messed up, boy. Can not satisfy. :o"})
+
+    json_str = request.body.decode(encoding='UTF-8')
+    data = json.loads(json_str)
+
+    for entry in data:
+        image = request.user.memes.filter(id=int(entry["image_id"])).first()
+
+        if not image:
+            return JsonResponse({"response": "error", "message": "Not a valid image! DOPE!"})
+
+        if image not in request.user.memes.all():
+            request.user.memes.remove(image)
+            request.user.save()
+    return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})
+
+
