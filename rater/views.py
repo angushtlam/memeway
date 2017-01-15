@@ -122,7 +122,10 @@ def upvote(request):
         account.save()
         request.user.save()
         messages.success(request, "You two are a match! Go to chat and check them out!")
-
+        chat = ChatRoom.objects.create()
+        chat.users.add(account)
+        chat.users.add(request.user)
+        chat.save()
     return redirect("rater:index")
 
 
@@ -226,9 +229,8 @@ def delete_meme_from_account(request):
         if not image:
             return JsonResponse({"response": "error", "message": "Not a valid image! DOPE!"})
 
-        if image not in request.user.memes.all():
+        if image in request.user.memes.all():
             request.user.memes.remove(image)
             request.user.save()
     return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})
-
 
