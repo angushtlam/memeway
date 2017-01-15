@@ -42,22 +42,6 @@ body {
 	width: 100%;
 }
 
-.fab-like {
-	background-color: #ff4489;
-}
-
-.fab-pass {
-	background-color: #415e96;
-}
-
-.fab-next {
-	background-color: #f1be47;
-}
-
-.fab-continue.disabled {
-	display: none;
-}
-
 /* Top Nav */
 .btn-group-wide {
 	width: 100%;
