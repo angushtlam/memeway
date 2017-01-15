@@ -39,8 +39,15 @@ def index(request):
     # else:
     account = random.choice(User.objects.all())
 
-    while account == request.user or (account in request.user.liked.all() or account in request.user.matches.all()):
+    count = 0
+    while count < 30 and (account == request.user or (account in request.user.liked.all() or account in request.user.matches.all())):
         account = random.choice(User.objects.all())
+        count += 1
+
+    if count >= 30:
+        account = random.choice(User.objects.all())
+        while request.user == account:
+            return random.choice(User.objects.all())
 
     request.user.last_viewed = account
     request.user.save()
