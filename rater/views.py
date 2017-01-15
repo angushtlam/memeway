@@ -19,8 +19,11 @@ def get_chat(user, chat_key):
 def random_chat(user):
     chat = random.choice(user.chats.all())
 
+    print(chat)
+
     if chat is None:
         chat = random.choice(user.ignore_me_ignore_me.all())
+        print(chat)
     return chat
 
 
@@ -48,6 +51,9 @@ def index(request):
 
     while account == request.user:
         account = random.choice(User.objects.all())
+
+    request.user.last_viewed = account
+    request.user.save()
 
     return render(request, "discover/discover.html", {"account": account})
 
@@ -95,6 +101,30 @@ def save_meme_to_account(request):
     image.save()
 
     return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})
+
+
+@login_required
+def downvote(request):
+    account = request.user.last_viewed
+    account.downvotes += 1
+    account.save()
+
+    return redirect("rater:index")
+
+
+@login_required
+def upvote(request):
+    account = request.user.last_viewed
+    request.user.liked.add(account)
+    request.user.save()
+
+    if request.user in account.liked.all():
+        request.user.matches.add(account)
+        account.matches.add(request.user)
+        account.save()
+        request.user.save()
+
+    return redirect("rater:index")
 
 
 @login_required
