@@ -33,7 +33,7 @@ $(document).ready(function () {
 	$('.fab-continue').click(function () {
 		var selectedMemes = $('.meme.selected');
 		if (selectedMemes.length < 1) {
-			alert('You did not select any memes!');
+			alertify.alert('You did not select any memes!');
 		} else {
 			var data = [];
 
@@ -56,7 +56,7 @@ $(document).ready(function () {
 							$(this).remove();
 						});					
 
-						alert('You have removed the selected memes from your profile.');
+						alertify.alert('You have removed the selected memes from your profile.');
 						$('.fab-continue').addClass('disabled');
 						grid.masonry('layout');
 				  },
