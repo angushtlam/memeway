@@ -17,7 +17,7 @@
               <a href="{% url 'rater:index' %}" role="button" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i></a>
               <a href="{% url 'rater:chat_room_init' %}" role="button" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i></a>
               <a href="{% url 'rater:random' %}" role="button" class="btn btn-secondary"><i class="fa fa-random" aria-hidden="true"></i></a>
-              <a href="{% url 'rater:my_account' %}" role="button" class="btn btn-secondary"><i class="fa fa-cog" aria-hidden="true"></i></a>
+              <a href="{% url 'rater:my_account' %}" role="button" class="btn btn-secondary"><i class="fa fa-user" aria-hidden="true"></i></a>
             </div>
         </div>
         <br />
@@ -33,7 +33,8 @@
 </div>
 <div class="chat-room">
     <div class="chat-room-body">
-        <h1 id="talking-to">{{ request.user|get_other:chat }}</h1>
+        <h1 class="chat-username" id="talking-to">{{ request.user|get_other:chat }}</h1>
+        <span><a href="/discover/view/{{ request.user|get_other:chat }}"> <i class="fa fa-user" aria-hidden="true"></i> View Profile</a></span>
         <div id="chat-key">{{ chat.key }}</div>
 
         <div class="chat">

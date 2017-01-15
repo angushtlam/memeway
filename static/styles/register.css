@@ -1,5 +1,19 @@
+body {
+	background: #111 url('/static/assets/test.jpg') center center no-repeat;
+	background-size: cover;
+}
+
 .container {
-	margin-top: 15px;
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 3px;
+	margin-bottom: 60px;
+	padding-top: 15px;
+}
+
+.content {
+	background: url('/static/assets/util/antipixel_overlay.png') repeat;
+	padding-top: 60px;
+	height: 100%;
 }
 
 .btn {
