@@ -120,11 +120,6 @@ english_bot = ChatBot("English Bot", logic_adapters=(
     {
         "import_path": "chatterbot.logic.MathematicalEvaluation"
     },
-    {
-        "import_path": "chatterbot.logic.LowConfidenceAdapter",
-        'threshold': 0.2,
-        'default_response': "Am I one of Hillary's emails because that response is missing, or you're just not making sense!"
-    }
 ))
 english_bot.set_trainer(ChatterBotCorpusTrainer)
 english_bot.train("chatterbot.corpus.english")

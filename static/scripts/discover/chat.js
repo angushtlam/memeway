@@ -15,8 +15,6 @@ $('#chat-input-form').submit(function (event) {
 
         var chatKey = $('#chat-key').html();
 
-        var contains_memecat = $('#is_memecat').val() == "1";
-
         var data = {
             message: $('#chat-message-field').val(),
             chat_key: chatKey
