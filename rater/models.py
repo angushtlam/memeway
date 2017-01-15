@@ -204,6 +204,8 @@ class Message(models.Model):
 
     text = models.TextField(default="")
 
+    chat = models.ForeignKey(ChatRoom, related_name="messages", on_delete=CASCADE, null=True)
+
     sender = models.ForeignKey(User, related_name="sent_messages", on_delete=CASCADE)
 
     class Meta:

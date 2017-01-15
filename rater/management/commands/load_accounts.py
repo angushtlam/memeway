@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         for user in User.objects.all():
-            if user.username != "dan":
+            if user.username not in ["dan", "angus"]:
                 user.delete()
 
         accounts = options['accounts']

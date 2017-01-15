@@ -115,4 +115,4 @@ def chat_room(request, chat_key):
         return redirect("rater:index")
 
     chats = request.user.chats.all()
-    return render(request, "discover/chat.html", {"chats": chats})
+    return render(request, "discover/chat.html", {"chats": chats, "chat": chat})
