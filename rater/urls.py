@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^delete-meme$', delete_meme_from_account, name="delete_meme"),
     url(r'^upvote$', upvote, name="upvote"),
     url(r'^downvote$', downvote, name="downvote"),
+    url(r'^view/(?P<username>[0-9A-Za-z]+)$', view_profile, name="view_profile"),
 ]

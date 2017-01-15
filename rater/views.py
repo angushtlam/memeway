@@ -53,7 +53,7 @@ def index(request):
     request.user.last_viewed = account
     request.user.save()
 
-    return render(request, "discover/discover.html", {"account": account})
+    return render(request, "discover/discover.html", {"account": account, "viewing": False})
 
 
 @login_required
@@ -252,4 +252,19 @@ def delete_meme_from_account(request):
             request.user.memes.remove(image)
             request.user.save()
     return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})
+
+
+@login_required
+def view_profile(request, username):
+
+    account = User.objects.filter(username=username).first()
+
+    if account == request.user:
+        return redirect("rater:my_account")
+
+    if account is None:
+        return redirect("rater:index")
+
+    return render(request, "discover/discover.html", {"account": account, "viewing": True})
+
 
