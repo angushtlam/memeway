@@ -114,3 +114,7 @@ body {
 .btn-group-wide .btn {
 	width: 20%;
 }
+
+textarea {
+	resize: none;
+}

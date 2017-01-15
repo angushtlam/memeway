@@ -65,3 +65,8 @@ $(document).ready(function () {
 		}
 	});
 });
+
+
+function submitForm() {
+	$('#account-form').submit();
+}
