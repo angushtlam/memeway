@@ -146,3 +146,7 @@ body {
 		height: 85%;
 	}
 }
+
+#chat-key {
+	display: none;
+}
