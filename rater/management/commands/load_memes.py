@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 import bs4
 import urllib.request
+from time import sleep
 
 from rater.models import Meme, MemeImage
 
@@ -21,7 +22,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        BLOCKED = ["shantae"]
+
         pages = options['pages']
+
+        # Start fresh
+        for meme in Meme.objects.all():
+            meme.delete()
 
         # Iterate through all the pages
         for page in range(1, pages+1):
@@ -47,6 +54,9 @@ class Command(BaseCommand):
 
                 link = anchor["href"]
 
+                if Meme.objects.filter(title=name).first() or name.lower() in BLOCKED:
+                    continue
+
                 # Follow link to meme
                 url = "http://knowyourmeme.com%s" % link
                 meme_page = bs4.BeautifulSoup(urllib.request.urlopen(url).read(), "html.parser").find("section", class_="bodycopy")
@@ -71,5 +81,7 @@ class Command(BaseCommand):
                 print("Successfully created %s meme with %s image(s)." % (meme_obj.title, len(meme_obj.images.all() )))
 
             print("")
+
+            sleep(0.1)
 
         self.stdout.write(self.style.SUCCESS('Successfully got all the memes.'))
