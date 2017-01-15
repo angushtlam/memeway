@@ -50,6 +50,38 @@ class Meme(models.Model):
                 self.save()
 
     @property
+    def average_upvotes(self):
+
+        votes = 0
+        for image in self.images.all():
+            votes += image.upvotes
+        return int(votes / len(self.images.all()))
+
+    @property
+    def average_downvotes(self):
+
+        votes = 0
+        for image in self.images.all():
+            votes += image.downvotes
+        return int(votes / len(self.images.all()))
+
+    @property
+    def total_upvotes(self):
+
+        votes = 0
+        for image in self.images.all():
+            votes += image.upvotes
+        return votes
+
+    @property
+    def total_downvotes(self):
+
+        votes = 0
+        for image in self.images.all():
+            votes += image.downvotes
+        return votes
+
+    @property
     def number_picked(self):
         count = 0
         for image in self.images.all():
@@ -98,6 +130,10 @@ class MyUserManager(BaseUserManager):
 class MemeImage(models.Model):
 
     meme = models.ForeignKey(Meme, related_name="images", on_delete=CASCADE)
+
+    upvotes = models.IntegerField(default=0)
+
+    downvotes = models.IntegerField(default=0)
 
     url = models.CharField(default="", max_length=256)
 

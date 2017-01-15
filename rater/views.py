@@ -137,8 +137,10 @@ def random_meme(request):
         meme_img = MemeImage.objects.filter(id=request.POST.get("pk", 0)).first()
         if int(request.POST.get("quality", 1)) == 0:
             if meme_img:
-                meme_img.delete()
-                print("Deleted meme.")
+                meme_img.downvotes += 1
+        else:
+            if meme_img:
+                meme_img.upvotes += 1
 
     meme = random.choice(Meme.objects.all())
 
