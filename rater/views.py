@@ -231,4 +231,3 @@ def delete_meme_from_account(request):
             request.user.save()
     return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})
 
-
