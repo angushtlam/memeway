@@ -13,6 +13,8 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" >
     <link href="{% static 'lib/bootstrap/styles/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/alertify/alertify.core.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/alertify/alertify.default.css' %}" rel="stylesheet">
     <link href="{% static 'styles/base.css' %}" rel="stylesheet">
     {% block styles %}{% endblock %}
 
@@ -32,6 +34,17 @@
     <script src="{% static 'lib/bootstrap/scripts/bootstrap.js' %}"></script>
     {% block scripts %}{% endblock %}
     {% block post_scripts %}{% endblock %}
+    <script src="{% static 'lib/alertify/alertify.min.js' %}"></script>
+
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+
+                alertify.alert('{{ message }}');
+            {% endfor %}
+        {% endif %}
+    </script>
+
 </body>
 
 </html>

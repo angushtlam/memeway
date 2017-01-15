@@ -20,9 +20,12 @@ class Command(BaseCommand):
 
         for num in range(0, accounts):
 
-            username = random_generator()
+            if num == 0:
+                username = "memecat"
+            else:
+                username = "User " + random_generator(5)
 
-            user = User.objects.create_user(username, random_generator(), "Example User", str(num))
+            user = User.objects.create_user(username, password=random_generator())
 
             user.save()
 
