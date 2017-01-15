@@ -1,0 +1,148 @@
+body {
+	background: #212121;
+}
+
+.page-background {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#212121+0,f1be47+100 */
+	background: #212121; /* Old browsers */
+	background: -moz-linear-gradient(top, #212121 0%, #f1be47 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #212121 0%,#f1be47 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #212121 0%,#f1be47 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#f1be47',GradientType=0 ); /* IE6-9 */
+	height: 100%;
+	width: 100%;
+	position: fixed;
+}
+
+.user-contacts {
+	padding: 15px;
+}
+
+.user-contacts-body {
+	background-color: #fff;
+	border-radius: 3px;
+	position: relative;
+	height: 100%;
+	padding: 30px;
+}
+
+.nav-top {
+	width: 100%;
+}
+
+.chat-room {
+	padding: 15px;
+	height: 100%;
+	z-index: 1000;
+	position: relative;
+}
+
+.chat-room-body {
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 15px;
+	position: relative;
+	height: 100%;
+}
+
+@media only screen and (min-width: 1132px) {
+	.user-contacts {
+		height: 100%;
+		position: fixed;
+		width: 33.33%;
+	}
+
+	.chat-room {
+		float: right;
+		width: 66.66%;
+	}
+}
+
+.chat {
+	height: 90%;
+	overflow-y: scroll;
+}
+
+/* Chat bubbles */
+.chat-bubble {
+	display: block;
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.chat-bubble-body {
+	background-color: #ddd;
+	border-radius: 15px;
+	display: inline-block;
+	margin-right: 60px;
+	padding: 15px;
+}
+
+.chat-bubble-body.my-message  {
+	background-color: #415e96;
+	color: #fff;
+	margin-right: 0;
+	margin-left: 60px;
+	float: right;
+}
+
+.chat-bubble-offset {
+	height: 100px;
+}
+
+.chat-input {
+	background-color: #ddd;
+	height: 120px;
+	padding: 15px;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+}
+
+.chat-input form,
+.chat-input .input-group {
+	height: 100%;
+}
+
+.chat-input .input-group-btn {
+	width: 100px;
+}
+
+/* FABs */
+.fabs {
+	text-align: center;
+	right: 0;
+}
+
+.fab {
+	margin: 0 15px;
+}
+
+/* Top Nav */
+.btn-group-wide {
+	width: 100%;
+}
+
+.btn-group-wide .btn {
+	width: 20%;
+}
+
+/* Contacts */
+.contacts {
+	overflow-y: scroll;
+	height: 400px
+}
+
+.contact {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin: 15px 0;
+	padding: 15px;
+}
+
+@media only screen and (min-width: 1132px) {
+	.contacts {
+		height: 85%;
+	}
+}

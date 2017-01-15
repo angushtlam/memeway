@@ -24,14 +24,17 @@
 			{% csrf_token %}
 			<p>This is how people will see you</p>
 			<h1>{{ account.username }}</h1>
-			<div class="form-group">
-		    <textarea class="form-control" id="exampleTextarea" name="description" rows="3">{{ account.description }}</textarea>
-		  </div>
+			<p>{{ account.description }}</p>
 			<p>
 				User since {{ account.created_on }}<br />
 				{{ account.liked_me.count }} like{% if account.liked_me.count != 1 %}s{% endif %}
 			</p>
 			<hr />
+			<h3>Change Description</h3>
+			<div class="form-group">
+		    <textarea class="form-control" id="exampleTextarea" name="description" rows="3">{{ account.description }}</textarea>
+		  </div>
+		  
 			<h3>Change Password</h3>
 			<div class="form-group">
           <input class="form-control" name="old_password" type="password" placeholder="Current Password">
