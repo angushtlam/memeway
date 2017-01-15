@@ -183,6 +183,22 @@ def chat_room_add(request, chat_key):
 
 @login_required
 def my_account(request):
+
+    if request.method == "POST":
+
+        description = request.POST.get("description", request.user.description)
+        old_password = request.POST.get("old_password", "__")
+        new_password = request.POST.get("new_password", "__")
+
+        request.user.description = description
+
+        if request.user.check_password(old_password):
+            request.user.set_password(new_password)
+            request.user.save()
+            messages.success(request, "Successful! Maybe now someone will actually like you ;)")
+        elif old_password != "__":
+            messages.error(request, "Your old password is not correct, try again you blithering idiot!")
+
     return render(request, "discover/my_account.html", {"account": request.user})
 
 
