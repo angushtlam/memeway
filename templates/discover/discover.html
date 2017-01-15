@@ -21,8 +21,8 @@
 	<h3>User Since</h3>
 	<p>January 14th, 2017</p>
 	<div class="fabs">
-		<div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div>
-		<div class="fab fab-like"><i class="fa fa-heart" aria-hidden="true"></i></div>
+		<a href="{% url 'rater:downvote' %}"><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
+		<a href="{% url 'rater:upvote' %}"><div class="fab fab-like"><i class="fa fa-heart" aria-hidden="true"></i></div></a>
 	</div>
 </div>
 <div class="user-memes">
