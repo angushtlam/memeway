@@ -132,7 +132,7 @@ class User(AbstractBaseUser):
 
     downvotes = models.IntegerField(default=0)
 
-    last_viewed = models.ForeignKey("self", related_name="last_viewed_me")
+    last_viewed = models.ForeignKey("self", related_name="last_viewed_me", null=True)
 
     memes = models.ManyToManyField(MemeImage, related_name="users_who_liked", blank=True)
 

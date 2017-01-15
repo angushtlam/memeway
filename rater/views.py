@@ -96,7 +96,8 @@ def save_meme_to_account(request):
         if not image:
             return JsonResponse({"response": "error", "message": "Not a valid image! DOPE!"})
 
-        image.users_who_liked.add(request.user)
+        if image not in request.user.memes.all():
+            image.users_who_liked.add(request.user)
 
     image.save()
 
