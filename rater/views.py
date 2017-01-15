@@ -196,6 +196,7 @@ def my_account(request):
             request.user.set_password(new_password)
             request.user.save()
             messages.success(request, "Successful! Maybe now someone will actually like you ;)")
+            return redirect("login")
         elif old_password != "":
             messages.error(request, "Your old password is not correct, try again you blithering idiot!")
 
