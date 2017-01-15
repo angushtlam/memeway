@@ -124,6 +124,7 @@ def upvote(request):
         account.matches.add(request.user)
         account.save()
         request.user.save()
+        messages.success(request, "You two are a match! Go to chat and check them out!")
 
     return redirect("rater:index")
 
