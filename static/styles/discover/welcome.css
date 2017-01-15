@@ -1,5 +1,5 @@
 body {
-	background-color: #eee;
+	background-color: #121212;
 }
 
 .hero {
@@ -19,6 +19,7 @@ body {
 }
 
 .content {
+	color: #fff;
 	text-align: center;
 	padding: 15px 0;
 }

@@ -17,19 +17,18 @@
 <div class="content">
 	<div class="container">
 		<p>Pick some of your favorites, and when you're ready, hit the continue button!</p>
-	
+		
+		<div class="meme-grid">
+			<div class="grid-sizer"></div>
+			{% for img in images %}
+				<div class="meme" data-meme-id="{{ img.id }}">
+					<img src="{{ img.url }}" title="{{ img.meme.title }}" />
+				</div>
+			{% endfor %}
+		</div>
+		<br />
 
-	<div class="meme-grid">
-		<div class="grid-sizer"></div>
-		{% for img in images %}
-			<div class="meme" data-meme-id="{{ img.id }}">
-				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
-			</div>
-		{% endfor %}
-	</div>
-	<br />
-
-	<button type="button" class="btn btn-secondary">Load More...</button>
+		<button type="button" class="btn btn-secondary">Load More...</button>
 	</div>
 </div>
 
