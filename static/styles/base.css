@@ -14,15 +14,33 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lily Script One', serif;
 }
 
-/* Header */
-.nav-top {
-	position: absolute;
-	padding: 10px;
+/* FABs */
+.fab {
+	border-radius: 50%;
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+}
+
+.fab span {
+	color: #fff;
+	display: block;
+	font-size: 60px;
+	text-align: center;
 	width: 100%;
 }
 
-.nav-top .btn {
-	display: inline-block;
-	float: right;
-	margin-left: 5px;
+.fab i {
+	color: #fff;
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	padding-top: 26px;
+	width: 100%;
+}
+
+/* Buttons */
+.btn-outline-secondary {
+	border-color: #fff !important;
+	color: #fff !important;
 }

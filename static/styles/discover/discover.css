@@ -1,0 +1,97 @@
+body {
+	background-color: #eee;
+}
+
+.user-profile {
+	background-color: #fff;
+	/*height: 100%;*/
+	padding: 15px;
+	/*position: fixed;*/
+	/*width: 33.33%;*/
+}
+
+.nav-top {
+	width: 100%;
+}
+
+.user-memes {
+	/*float: right;*/
+	padding: 0 15px;
+	/*width: 66.66%;*/
+}
+
+@media only screen and (min-width: 1132px) {
+	.user-profile {
+		height: 100%;
+		position: fixed;
+		width: 33.33%;
+	}
+
+	.user-memes {
+		float: right;
+		width: 66.66%;
+	}
+}
+
+.grid-sizer,
+.meme {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.meme.selected img {
+	border: 8px solid #ff4489;
+}
+
+@media only screen and (min-width: 768px) {
+	.grid-sizer,
+	.meme {
+		width: 48%;
+	}
+}
+
+@media only screen and (min-width : 992px) {
+	.grid-sizer,
+	.meme {
+		width: 32%;
+	}
+}
+
+.meme img {
+	border-radius: 3px;
+  width: 100%;
+  height: auto;
+}
+
+/* FABs */
+.fabs {
+	text-align: center;
+}
+
+.fab {
+	margin: 0 15px;
+}
+
+@media only screen and (min-width: 1132px) {
+	.fabs {
+		position: absolute;
+		bottom: 30px;
+		width: 100%;
+	}
+
+	.fab {
+		margin: 0 30px;
+	}
+}
+
+.fab-like {
+	background-color: red;
+}
+
+.fab-approve {
+	background-color: green;
+}
+
+.fab-pass {
+	background-color: blue;
+}
