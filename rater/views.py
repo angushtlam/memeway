@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from rater.models import *
 
 
@@ -168,20 +169,34 @@ def chat_room(request, chat_key):
     return render(request, "discover/chat.html", {"chats": chats, "chat": chat})
 
 
-@login_required
+@csrf_exempt
 def chat_room_add(request, chat_key):
+
+    print("*********************************")
 
     if request.method != "POST":
         return redirect("rater:chat", chat_key=chat_key)
 
-    chat = get_chat(request.user, chat_key)
+    chat = ChatRoom.objects.filter(key=chat_key).first()
 
     if chat is None:
-        return redirect("rater:index")
+        return JsonResponse({"response": "error", "message": "Chat not found"})
 
-    message = Message.objects.create(text=request.POST.get("text", ""), chat=chat, sender=request.user)
-    message.save()
-    return redirect("rater:chat", chat_key=chat_key)
+    text = request.POST.get("text", "Nope.")
+
+    memecat = User.objects.filter(username="memecat").first()
+
+    if request.POST.get("sender", "user") == "memecat":
+        message = Message.objects.create(text=request.POST.get("text", ""), chat=chat,
+                                         sender=memecat)
+        message.save()
+    else:
+        message = Message.objects.create(text=request.POST.get("text", ""), chat=chat,
+                                         sender=chat.get_other_user(memecat))
+        message.save()
+
+
+    return JsonResponse({"response": "ok", "message": "All good"})
 
 
 @login_required
