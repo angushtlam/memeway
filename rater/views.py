@@ -126,8 +126,6 @@ def upvote(request):
         chat.users.add(account)
         chat.users.add(request.user)
         chat.save()
-        return redirect("rater:chat", chat_key=chat.key)
-
     return redirect("rater:index")
 
 
