@@ -138,9 +138,13 @@ def random_meme(request):
         if int(request.POST.get("quality", 1)) == 0:
             if meme_img:
                 meme_img.downvotes += 1
+                meme_img.save()
         else:
             if meme_img:
                 meme_img.upvotes += 1
+                if meme_img not in request.user.memes.all():
+                    meme_img.users_who_liked.add(request.user)
+                meme_img.save()
 
     meme = random.choice(Meme.objects.all())
 
