@@ -60,7 +60,7 @@ def index(request):
 def welcome(request):
     if len(request.user.memes.all()) > 0:
         return redirect("rater:index")
-    memes = random.sample(list(Meme.objects.all()), 15)
+    memes = random.sample(list(Meme.objects.all()), 30)
     images = []
     for meme in memes:
         images.append(random.choice(meme.images.all()))

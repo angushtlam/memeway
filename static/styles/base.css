@@ -80,6 +80,7 @@ input,
 textarea {
 	font-family: 'Comic Sans MS', san-serif !important;
 	border-radius: 0 !important;
+	padding: 15px !important;
 }
 
 .btn-primary {
@@ -111,11 +112,6 @@ a:hover {
 	color: #f1be47;
 }
 
-/* Forms */
-input,
-textarea {
-	padding: 15px !important;
-}
 
 .emoji {
   width: 1.5em;
