@@ -18,6 +18,10 @@ def get_chat(user, chat_key):
 
 @login_required
 def index(request):
+
+    if len(request.user.memes.all()) == 0:
+        return redirect("rater:welcome")
+
     if len(request.user.memes.all()) > 0:
         meme_to_compare = random.choice(request.user.memes.all())
     else:
