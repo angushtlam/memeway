@@ -182,8 +182,6 @@ def chat_room_add(request, chat_key):
     if chat is None:
         return JsonResponse({"response": "error", "message": "Chat not found"})
 
-    text = request.POST.get("text", "Nope.")
-
     memecat = User.objects.filter(username="memecat").first()
 
     if request.POST.get("sender", "user") == "memecat":
@@ -194,7 +192,6 @@ def chat_room_add(request, chat_key):
         message = Message.objects.create(text=request.POST.get("text", ""), chat=chat,
                                          sender=chat.get_other_user(memecat))
         message.save()
-
 
     return JsonResponse({"response": "ok", "message": "All good"})
 
