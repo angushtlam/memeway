@@ -172,8 +172,6 @@ def chat_room(request, chat_key):
 @csrf_exempt
 def chat_room_add(request, chat_key):
 
-    print("*********************************")
-
     if request.method != "POST":
         return redirect("rater:chat", chat_key=chat_key)
 
