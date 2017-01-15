@@ -21,17 +21,14 @@ body {
 }
 
 .meme-card {
-	background-color: #fff;
-	border-radius: 3px;
 	display: inline-block;
-	margin: 45px 15px 15px 15px;
-	padding: 15px;
+	padding: 30px;
 }
 
-.meme-card.meme-img {
-	height: 100%;
-	/*min-width: 300px;*/
-	width: 100%;
+.meme-card-content {
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 15px;
 }
 
 /* FABs */
