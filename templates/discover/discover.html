@@ -6,10 +6,42 @@
 {% endblock %}
 
 {% block content %}
-{% include 'components/header.html' %}
+<div class="user-profile">
+	<div class="nav-top">
+	  <button type="button" class="btn btn-secondary">Log Out</button>
+		<div class="btn-group" role="group">
+		  <button type="button" class="btn btn-primary">Discover</button>
+		  <button type="button" class="btn btn-secondary">Chat</button>
+		</div>
+	</div>
+	<br />
+	<p>You are viewing the profile of</p>
+	<h1>{{ account.username }}</h1>
+	<hr />
+	<h3>User Since</h3>
+	<p>January 14th, 2017</p>
+	<div class="fabs">
+		<div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div>
+		<div class="fab fab-like"><i class="fa fa-heart" aria-hidden="true"></i></div>
+	</div>
+</div>
+<div class="user-memes">
+	<div class="meme-grid">
+		<div class="grid-sizer"></div>
+		{% for img in account.memes.all|slice:":10" %}
+			<div class="meme" data-meme-id="{{ img.id }}">
+				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
 
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'scripts/discover.js' %}"></script>
+<script src="{% static 'scripts/csrf.js' %}""></script>
+<script src="{% static 'lib/masonry/imagesloaded.min.js' %}""></script>
+<script src="{% static 'lib/masonry/masonry.min.js' %}""></script>
+<script src="{% static 'scripts/discover/discover.js' %}"></script>
 {% endblock %}
