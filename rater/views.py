@@ -22,26 +22,24 @@ def index(request):
     if len(request.user.memes.all()) == 0:
         return redirect("rater:welcome")
 
-    if len(request.user.memes.all()) > 0:
-        meme_to_compare = random.choice(request.user.memes.all())
-    else:
-        meme_to_compare = random.choice(MemeImage.objects.all())
+    # if len(request.user.memes.all()) > 0:
+    #     meme_to_compare = random.choice(request.user.memes.all())
+    # else:
+    #     meme_to_compare = random.choice(MemeImage.objects.all())
+    #
+    # tag_to_compare = random.choice(meme_to_compare.meme.tags.all())
+    #
+    # meme_to_use = random.choice(tag_to_compare.memes.all())
+    #
+    # image_to_use = random.choice(meme_to_use.images.all())
+    #
+    # if len(image_to_use.users_who_liked.all()) > 0:
+    #     account = random.choice(image_to_use.users_who_liked.all())
+    # else:
+    account = random.choice(User.objects.all())
 
-    tag_to_compare = random.choice(meme_to_compare.meme.tags.all())
-
-    meme_to_use = random.choice(tag_to_compare.memes.all())
-
-    image_to_use = random.choice(meme_to_use.images.all())
-
-    if len(image_to_use.users_who_liked.all()) > 0:
-        account = random.choice(image_to_use.users_who_liked.all())
-    else:
-        account = random.choice(User.objects.all())
     while account == request.user:
-        if len(image_to_use.users_who_liked.all()) > 0:
-            account = random.choice(image_to_use.users_who_liked.all())
-        else:
-            account = random.choice(User.objects.all())
+        account = random.choice(User.objects.all())
 
     return render(request, "discover/discover.html", {"account": account})
 
@@ -120,3 +118,19 @@ def chat_room(request, chat_key):
 
     chats = request.user.chats.all()
     return render(request, "discover/chat.html", {"chats": chats, "chat": chat})
+
+
+@login_required
+def chat_room(request, chat_key):
+
+    if request.method != "POST":
+        return redirect("rater:chat", chat_key=chat_key)
+
+    chat = get_chat(request.user, chat_key)
+
+    if chat is None:
+        return redirect("rater:index")
+
+
+
+

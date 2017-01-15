@@ -32,40 +32,37 @@
 
                         {% for message in chat.messages.all %}
 
-                        <li class="media">
+                            <li class="media">
 
-                            <div class="media-body">
+                                <div class="media-body">
 
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object img-circle " src="assets/img/user.png"/>
-                                    </a>
-                                    <div class="media-body">
-                                        Donec sit amet ligula enim. Duis vel condimentum massa.
-
-                                        Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula
-                                        enim.
-                                        Duis vel condimentum massa.
-                                        Donec sit amet ligula enim. Duis vel condimentum massa.
-                                        <br/>
-                                        <small class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
-                                        <hr/>
+                                    <div class="media">
+                                        <a class="pull-left" href="#">
+                                            <img class="media-object img-circle " src="assets/img/user.png"/>
+                                        </a>
+                                        <div class="media-body">
+                                            {{ message.text }}
+                                            <br/>
+                                            <small class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
+                                            <hr/>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
-                        </li>
+                                </div>
+                            </li>
 
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="panel-footer">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter Message"/>
+                    <form method="post" action="{% url 'rater:chat_add' chat_key=chat.key %}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Message"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-info" type="button">SEND</button>
                                     </span>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
