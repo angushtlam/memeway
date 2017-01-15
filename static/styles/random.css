@@ -5,10 +5,10 @@ body {
 
 .page-background {
 	background: #212121; /* Old browsers */
-	background: -moz-linear-gradient(top, #212121 0%, #2a3e63 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #212121 0%,#2a3e63 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, #212121 0%,#2a3e63 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#2a3e63',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top, #212121 0%, #28504e 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #212121 0%,#28504e 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #212121 0%,#28504e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#28504e',GradientType=0 ); /* IE6-9 */
 	height: 100%;
 	width: 100%;
 	position: fixed;
@@ -22,18 +22,30 @@ body {
 
 .meme-card {
 	display: inline-block;
-	padding: 30px;
+	padding: 15px;
+	margin-bottom: 30px;
 }
 
 .meme-card-content {
 	background-color: #fff;
 	border-radius: 3px;
-	padding: 15px;
+	padding: 30px;
 }
 
 .nav-top {
 	background-color: #fff;
-	padding: 15px;
+	border-radius: 3px;
+	display: block;
+	padding: 30px;
+	margin: 15px;
+	text-align: center
+}
+
+@media only screen and (min-width: 600px) {
+	.nav-top {
+		margin: 15px auto;
+		max-width: 600px;
+	}
 }
 
 /* FABs */
