@@ -12,6 +12,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        names = ["diane", "jack", "jill", "bridget", "collin", "julia", "rainbowgurl", "xoxgirlxox"]
+
         for user in User.objects.all():
             if user.username not in ["dan", "angus"]:
                 user.delete()
@@ -28,7 +30,7 @@ class Command(BaseCommand):
             if num == 0:
                 username = "memecat"
             else:
-                username = "User" + random_generator(5)
+                username = random.choice(names) + str(num)
 
             user = User.objects.create_user(username, password=random_generator())
 

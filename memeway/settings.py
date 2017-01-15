@@ -34,7 +34,7 @@ DEBUG = ENV["DEBUG"]
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = ["memeway.herokuapp.com"]
+    ALLOWED_HOSTS = ["memeconnect.herokuapp.com"]
 
 
 # Application definition
