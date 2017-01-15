@@ -10,7 +10,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>BOOTSTRAP CHAT EXAMPLE</title>
+    <title>MemeConnect Chat</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -38,12 +38,16 @@
 
                                     <div class="media">
                                         <a class="pull-left" href="#">
-                                            <img class="media-object img-circle " src="assets/img/user.png"/>
+                                            {% if message.sender == request.user %}
+                                                <img class="media-object img-circle " src="{% static 'assets/blank.png' %}"/>
+                                            {% else %}
+                                                <img class="media-object img-circle " src="{% static 'assets/chat-avi.png' %}"/>
+                                            {% endif %}
                                         </a>
                                         <div class="media-body">
                                             {{ message.text }}
                                             <br/>
-                                            <small class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
+                                            <small class="text-muted">{{ message.sender.username }}</small>
                                             <hr/>
                                         </div>
                                     </div>
@@ -56,10 +60,11 @@
                 </div>
                 <div class="panel-footer">
                     <form method="post" action="{% url 'rater:chat_add' chat_key=chat.key %}">
+                        {% csrf_token %}
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Message"/>
+                            <input type="text" class="form-control" name="text" placeholder="Enter Message" required/>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-info" type="button">SEND</button>
+                                        <button class="btn btn-info" type="submit">SEND</button>
                                     </span>
                         </div>
                     </form>

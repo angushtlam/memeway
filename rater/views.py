@@ -1,5 +1,6 @@
 import json
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -110,6 +111,14 @@ def random_meme(request):
 
 
 @login_required
+def chat_room_init(request):
+    if len(request.user.chats.all()) > 0:
+        return redirect("rater:chat", chat_key=random.choice(request.user.chats.all()).key)
+    messages.error(request, "You need to match with people before you can chat!")
+    return redirect("rater:index")
+
+
+@login_required
 def chat_room(request, chat_key):
     chat = get_chat(request.user, chat_key)
 
@@ -121,7 +130,7 @@ def chat_room(request, chat_key):
 
 
 @login_required
-def chat_room(request, chat_key):
+def chat_room_add(request, chat_key):
 
     if request.method != "POST":
         return redirect("rater:chat", chat_key=chat_key)
@@ -131,6 +140,8 @@ def chat_room(request, chat_key):
     if chat is None:
         return redirect("rater:index")
 
-
+    message = Message.objects.create(text=request.POST.get("text", ""), chat=chat, sender=request.user)
+    message.save()
+    return redirect("rater:chat", chat_key=chat_key)
 
 

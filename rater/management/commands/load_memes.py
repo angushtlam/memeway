@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        BLOCKED = ["shantae"]
+        BLOCKED = ["shantae", "zettai"]
 
         pages = options['pages']
 
