@@ -88,10 +88,17 @@ body {
 	background-color: red;
 }
 
-.fab-approve {
-	background-color: green;
-}
-
 .fab-pass {
 	background-color: blue;
+}
+
+.fab-continue {
+	background-color: #419641;
+	bottom: 30px;
+	position: fixed;
+	right: 30px;
+}
+
+.fab-continue.disabled {
+	display: none;
 }
