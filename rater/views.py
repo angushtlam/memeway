@@ -23,7 +23,7 @@ def index(request):
     else:
         meme_to_compare = random.choice(Meme.objects.all())
 
-    tag_to_compare = random.choice(meme_to_compare.tags.all())
+    tag_to_compare = random.choice(meme_to_compare.meme.tags.all())
 
     meme_to_use = random.choice(tag_to_compare.memes.all())
 

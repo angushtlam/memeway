@@ -22,29 +22,21 @@
 
             var lastMessage = "";
 
-            socket = io.connect('http://' + document.domain + ':' + "5000" + '/chat');
+            socket = io.connect('http://' + document.domain + ':' + "5000" + '/chat/' + '{{ chat.key }}');
 
             socket.on('connect', function () {
-                socket.emit('joined', {});
+                console.log("Sending message");
+                socket.emit('joined', {msg: "{{ request.user.username }} is now on!", room: "{{ chat.key }}"});
             });
 
             socket.on('status', function (data) {
-                $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
-                $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                // Add status bar that someone has joined
+                console.log("Hello");
+                $("#chat-history").append("<li class='alert alert-info'>" + data.msg + "</li>");
             });
 
             socket.on('message', function (data) {
-                var avi = "/static/assets/blank.png";
-                if (data.msg != lastMessage) {
-                    avi = "/static/assets/chat-avi.png"
-                }
-                // When new message, add chat message
-                var new_message = '<li class="media"><div class="media-body"><div class="media">' +
-                        '<a class="pull-left" href="#"><img class="media-object img-circle " src='+ avi +
-                        '/></a><div class="media-body">' + data.msg +
-                        '<br/><small class="text-muted">Alex Deo | 23rd June at 5:00pm</small><hr/></div></div></div></li>';
-                $("#chat-history").append(new_message);
-
+                location.reload();
                 // Scroll to the top of the chat
 
             });
