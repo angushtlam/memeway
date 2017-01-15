@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block styles %}
-<link href="{% static 'styles/discover/discover.css' %}" rel="stylesheet">
+<link href="{% static 'styles/discover/my_account.css' %}" rel="stylesheet">
 <link href="{% static 'lib/animatecss/animate.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -19,31 +19,31 @@
 			</div>
 		</div>
 		<br />
-		<p>This is how people will see you:</p>
+		<p>This is how people will see you</p>
 		<h1>{{ account.username }}</h1>
+		<p>{{ account.description }}</p>
 		<hr />
-		<h3>You've been a user since</h3>
-		<p>{{ account.created_on }}</p>
-		
-		<p>{{ account.liked_me.count }} likes</p>
+		<p>
+			User since {{ account.created_on }}<br />
+			{{ account.liked_me.count }} like{% if account.liked_me.count != 1 %}s{% endif %}
+		</p>
 
 		<div class="fabs">
-			<a href="{% url 'rater:downvote' %}"><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
-			<a href="{% url 'rater:upvote' %}"><div class="fab fab-like"><i class="fa fa-heart" aria-hidden="true"></i></div></a>
+			<a href="{% url 'rater:downvote' %}"><div class="fab fab-update"><i class="fa fa-check" aria-hidden="true"></i></div></a>
 		</div>
 	</div>
 </div>
 <div class="user-memes">
 	<div class="meme-grid">
 		<div class="grid-sizer"></div>
-		{% for img in account.memes.all|slice:":10" %}
+		{% for img in account.memes.all %}
 			<div class="meme animated flipInX" data-meme-id="{{ img.id }}">
 				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
 			</div>
 		{% endfor %}
 	</div>
 
-	<div class="fab fab-continue disabled"><span>+</span></div>
+	<div class="fab fab-continue disabled"><i class="fa fa-times" aria-hidden="true"></i></div>
 </div>
 
 

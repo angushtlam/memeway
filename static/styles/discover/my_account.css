@@ -1,5 +1,5 @@
 body {
-	background-color: #212121;
+	background-color: #eee;
 }
 
 .user-profile {
@@ -91,16 +91,12 @@ body {
 	}
 }
 
-.fab-like {
-	background-color: #ff4489;
-}
-
-.fab-pass {
-	background-color: #415e96;
+.fab-update {
+	background-color: #419641;
 }
 
 .fab-continue {
-	background-color: #419641;
+	background-color: #964141;
 	bottom: 30px;
 	position: fixed;
 	right: 30px;

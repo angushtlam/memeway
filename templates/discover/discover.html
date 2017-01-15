@@ -15,18 +15,18 @@
 			  <a href="{% url 'rater:index' %}" role="button" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
 			  <a href="{% url 'rater:chat_room_init' %}" role="button" class="btn btn-secondary"><i class="fa fa-comments" aria-hidden="true"></i></a>
 			  <a href="{% url 'rater:random' %}" role="button" class="btn btn-secondary"><i class="fa fa-random" aria-hidden="true"></i></a>
-			  <a href="{% url 'rater:index' %}" role="button" class="btn btn-secondary"><i class="fa fa-cog" aria-hidden="true"></i></a>
+			  <a href="{% url 'rater:my_account' %}" role="button" class="btn btn-secondary"><i class="fa fa-cog" aria-hidden="true"></i></a>
 			</div>
 		</div>
 		<br />
 		<p>You are viewing the profile of</p>
 		<h1>{{ account.username }}</h1>
 		<p>{{ account.description }}</p>
-		<hr />
-		<h3>User Since</h3>
-		<p>{{ account.created_on }}</p>
-		
-		<p>{{ account.liked_me.count }} like{% if account.liked_me.count != 1 %}s{% endif %}</p>
+
+		<p>
+			User since {{ account.created_on }}<br />
+			{{ account.liked_me.count }} like{% if account.liked_me.count != 1 %}s{% endif %}
+		</p>
 
 		<div class="fabs">
 			<a href="{% url 'rater:downvote' %}"><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
@@ -37,7 +37,7 @@
 <div class="user-memes">
 	<div class="meme-grid">
 		<div class="grid-sizer"></div>
-		{% for img in account.memes.all|slice:":10" %}
+		{% for img in account.memes.all|slice:":15" %}
 			<div class="meme animated flipInX" data-meme-id="{{ img.id }}">
 				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
 			</div>
