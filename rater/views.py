@@ -187,7 +187,7 @@ def my_account(request):
     if request.method == "POST":
 
         description = request.POST.get("description", request.user.description)
-        old_password = request.POST.get("old_password", "__")
+        old_password = request.POST.get("old_password", "")
         new_password = request.POST.get("new_password", "__")
 
         request.user.description = description
@@ -196,7 +196,7 @@ def my_account(request):
             request.user.set_password(new_password)
             request.user.save()
             messages.success(request, "Successful! Maybe now someone will actually like you ;)")
-        elif old_password != "__":
+        elif old_password != "":
             messages.error(request, "Your old password is not correct, try again you blithering idiot!")
 
     return render(request, "discover/my_account.html", {"account": request.user})
