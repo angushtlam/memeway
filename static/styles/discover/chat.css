@@ -3,12 +3,11 @@ body {
 }
 
 .page-background {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#212121+0,f1be47+100 */
 	background: #212121; /* Old browsers */
-	background: -moz-linear-gradient(top, #212121 0%, #f1be47 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #212121 0%,#f1be47 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, #212121 0%,#f1be47 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#f1be47',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top, #212121 0%, #ab8735 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #212121 0%,#ab8735 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #212121 0%,#ab8735 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#ab8735',GradientType=0 ); /* IE6-9 */
 	height: 100%;
 	width: 100%;
 	position: fixed;
@@ -135,9 +134,10 @@ body {
 }
 
 .contact {
+	background-color: #fefefe;
 	border: 1px solid #ddd;
 	border-radius: 3px;
-	margin: 15px 0;
+	margin: 10px 0;
 	padding: 15px;
 }
 

@@ -3,5 +3,5 @@ $(document).ready(function () {
 		$('.user-contacts').addClass('animated slideInDown');
 	}
 
-	$(".chat").scrollTop($(".chat")[0].scrollHeight);
+	$('.chat').scrollTop($(".chat")[0].scrollHeight);
 });

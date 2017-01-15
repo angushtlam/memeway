@@ -33,20 +33,20 @@
 </div>
 <div class="chat-room">
     <div class="chat-room-body">
-        <h1>{{ request.user|get_other:chat }}</h1>
+        <h1 id="talking-to">{{ request.user|get_other:chat }}</h1>
 
         <div class="chat">
             {% for message in chat.messages.all %}
             <div class="chat-bubble clearfix">
                 <div class="chat-bubble-body {% if message.sender == request.user %}my-message{% endif %}">
-                    {{ message.text }}
+                    {{ message.text|linebreaksbr }}
                 </div>
             </div>
             {% endfor %}
             <div class="chat-bubble-offset"></div>
         </div>
         <div class="chat-input">
-            <form method="post" action="{% url 'rater:chat_add' chat_key=chat.key %}">
+            <form method="post" action="{% url 'rater:chat_add' chat_key=chat.key %}" id="chat-input-form">
                 {% csrf_token %}
                 <div class="input-group">
                     <input type="text" class="form-control" name="text" placeholder="" id="chat-message-field" autocomplete="off" required/>
