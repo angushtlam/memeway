@@ -40,10 +40,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Buttons */
+.btn,
+input,
+textarea {
+	font-family: 'Comic Sans MS', san-serif !important;
+	border-radius: 0 !important;
+}
+
+.btn-primary {
+	border: 1px solid #000;
+	background-color: #000;
+}
+
+.btn-primary:hover {
+	border: 1px solid #415e96;
+	background-color: #415e96;
+}
+
 .btn-outline-secondary {
+	background-color: rgba(0, 0, 0, 0.75);
 	border-color: #fff !important;
 	color: #fff !important;
 }
+
+/* Links */
+a {
+	color: #415e96;
+}
+
+a:hover {
+	color: #f1be47;
+}
+
+/* Forms */
 
 .emoji {
   width: 1.5em;
