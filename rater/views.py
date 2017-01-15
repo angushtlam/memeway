@@ -191,14 +191,19 @@ def my_account(request):
         new_password = request.POST.get("new_password", "__")
 
         request.user.description = description
+        request.user.save()
+
+        message = "Successful! Maybe now someone will actually like you ;)"
 
         if request.user.check_password(old_password):
             request.user.set_password(new_password)
             request.user.save()
-            messages.success(request, "Successful! Maybe now someone will actually like you ;)")
+            message += " Because you changed your password, you'll have to log back in! :D"
             return redirect("login")
         elif old_password != "":
             messages.error(request, "Your old password is not correct, try again you blithering idiot!")
+
+        messages.success(request, message)
 
     return render(request, "discover/my_account.html", {"account": request.user})
 
