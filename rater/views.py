@@ -189,9 +189,16 @@ def chat_room_add(request, chat_key):
                                          sender=memecat)
         message.save()
     else:
-        message = Message.objects.create(text=request.POST.get("text", ""), chat=chat,
+        if request.POST.get("sender_name", None):
+            message = Message.objects.create(text=request.POST.get("text", ""), chat=chat,
+                                             sender=chat.users.filter(username=request.POST.get("sender_name")).first())
+            message.save()
+            return redirect("rater:chat", chat_key=chat_key)
+        else:
+
+            message = Message.objects.create(text=request.POST.get("text", ""), chat=chat,
                                          sender=chat.get_other_user(memecat))
-        message.save()
+            message.save()
 
     return JsonResponse({"response": "ok", "message": "All good"})
 
