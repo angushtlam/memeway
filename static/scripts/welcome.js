@@ -27,30 +27,27 @@ $(document).ready(function () {
 		if (selectedMemes.length < 5) {
 			alert('Pick at least 5!');
 		} else {
-			var missingResponses = selectedMemes.length;
+			var data = [];
 
 			selectedMemes.each(function () {
-				var memeId = $(this).attr('meme-id');
+				var memeId = $(this).data('meme-id');
+				data.push({'image_id': memeId});
+			});
 
-				$.ajax({
+
+			$.ajax({
 				  type: 'POST',
 				  url: '/discover/save-meme',
-				  data: JSON.stringify({
-				  	'image-id': 'memeId'
-				  }),
+				  data: JSON.stringify(data),
 				  error: function (xhr, status, errorThrown) {
-				  	alert(errorThrown);
+				  	// alert(errorThrown);
 				  },
 				  success: function () {
-				  	missingResponses--;
-
-				  	if (missingResponses < 1) {
-							window.location.replace('/discover');
-				  	}
+						window.location.replace('/discover');
 				  },
-				  dataType: 'json'
+				  dataType: 'text',
+				  contentType: 'application/json'
 				});
-			});
 		}
 	});
 });

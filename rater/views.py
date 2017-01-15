@@ -74,12 +74,14 @@ def save_meme_to_account(request):
     json_str = request.body.decode(encoding='UTF-8')
     data = json.loads(json_str)
 
-    image = MemeImage.objects.filter(id=int(data["image_id"])).first()
+    for entry in data:
+        image = MemeImage.objects.filter(id=int(entry["image_id"])).first()
 
-    if not image:
-        return JsonResponse({"response": "error", "message": "Not a valid image! DOPE!"})
+        if not image:
+            return JsonResponse({"response": "error", "message": "Not a valid image! DOPE!"})
 
-    image.users_who_liked.add(request.user)
+        image.users_who_liked.add(request.user)
+
     image.save()
 
     return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})

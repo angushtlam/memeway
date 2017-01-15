@@ -22,8 +22,8 @@
 	<div class="meme-grid">
 		<div class="grid-sizer"></div>
 		{% for img in images %}
-			<div class="meme">
-				<img meme-id="{{ img.id }}" src="{{ img.url }}" title="{{ img.meme.title }}" />
+			<div class="meme" data-meme-id="{{ img.id }}">
+				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
 			</div>
 		{% endfor %}
 	</div>
