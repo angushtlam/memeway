@@ -14,7 +14,7 @@ import dj_database_url
 import os
 
 ENV = {
-    "DEBUG": False if os.getenv("DEBUG", "True") == "False" else True,
+    "DEBUG": True,
     "SECRET": ')_*^w!-p1a@puy+gonw+scc@r4a0ze7%j%bshg$#)pmws9%^bs'
 }
 
@@ -34,7 +34,7 @@ DEBUG = ENV["DEBUG"]
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = ["memeway.herokuapp.com"]
+    ALLOWED_HOSTS = ["memeconnect.herokuapp.com"]
 
 
 # Application definition
@@ -96,9 +96,9 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
+# if not DEBUG:
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -135,7 +135,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'collectedstaticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -145,4 +145,21 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+import logging, logging.config
+import sys
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        }
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO'
+    }
+}
 
