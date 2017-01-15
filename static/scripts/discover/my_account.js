@@ -45,7 +45,7 @@ $(document).ready(function () {
 
 			$.ajax({
 				  type: 'POST',
-				  url: '/discover/save-meme',
+				  url: '/discover/delete-meme',
 				  data: JSON.stringify(data),
 				  error: function (xhr, status, errorThrown) {
 				  	// alert(errorThrown);
@@ -53,10 +53,10 @@ $(document).ready(function () {
 				  success: function () {	
 						var selectedMemes = $('.meme.selected');		
 						selectedMemes.each(function () {
-							$(this).removeClass('selected');
+							$(this).remove();
 						});					
 
-						alert('You have added the selected memes to your profile.');
+						alert('You have removed the selected memes from your profile.');
 						$('.fab-continue').addClass('disabled');
 				  },
 				  dataType: 'text',

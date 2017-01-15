@@ -22,7 +22,8 @@
 		<p>You are viewing the profile of</p>
 		<h1>{{ account.username }}</h1>
 		<p>{{ account.description }}</p>
-
+	  <br />
+	  <br />
 		<p>
 			User since {{ account.created_on }}<br />
 			{{ account.liked_me.count }} like{% if account.liked_me.count != 1 %}s{% endif %}
@@ -44,7 +45,7 @@
 		{% endfor %}
 	</div>
 
-	<div class="fab fab-continue disabled"><span>+</span></div>
+	<div class="fab fab-continue disabled"><i class="fa fa-bookmark" aria-hidden="true"></i></div>
 </div>
 
 
