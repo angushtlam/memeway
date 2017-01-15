@@ -58,6 +58,7 @@ $(document).ready(function () {
 
 						alert('You have removed the selected memes from your profile.');
 						$('.fab-continue').addClass('disabled');
+						grid.masonry('layout');
 				  },
 				  dataType: 'text',
 				  contentType: 'application/json'
