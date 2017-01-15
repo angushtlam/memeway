@@ -14,7 +14,7 @@ import dj_database_url
 import os
 
 ENV = {
-    "DEBUG": False,
+    "DEBUG": False if os.getenv("DEBUG", "True") == "False" else True,
     "SECRET": ')_*^w!-p1a@puy+gonw+scc@r4a0ze7%j%bshg$#)pmws9%^bs'
 }
 
@@ -135,7 +135,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'collectedstaticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
