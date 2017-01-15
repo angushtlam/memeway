@@ -21,7 +21,7 @@ def index(request):
     if len(request.user.memes.all()) > 0:
         meme_to_compare = random.choice(request.user.memes.all())
     else:
-        meme_to_compare = random.choice(Meme.objects.all())
+        meme_to_compare = random.choice(MemeImage.objects.all())
 
     tag_to_compare = random.choice(meme_to_compare.meme.tags.all())
 
