@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer, ListTrainer
+import urllib.request, urllib.parse
 
 from chatterbot.logic import LogicAdapter
 
@@ -19,20 +20,31 @@ class MyLogicAdapter(LogicAdapter):
         from chatterbot.conversation import Statement
         import urllib.request as urllib
         import bs4
+        import re
 
         text = statement.text.lower()
 
         compare = ""
 
         if "who is" in text:
-            compare = text.split("who is")[1]
+            compare = text.split("who is ")[1]
         elif "what is" in text:
-            compare = text.split("what is")[1]
+            compare = text.split("what is ")[1]
 
         if len(compare) < 0:
             return 0, Statement("I can't understand who/what you are trying to find!")
 
-        url = "http://knowyourmeme.com/search?context=entries&sort=relevance&" + compare.replace(" ", "+")
+        clean = re.sub(r"""
+               [,.;@#?!&$]+  # Accept one or more copies of punctuation
+               \ *           # plus zero or more copies of a space,
+               """,
+                       "",  # and replace it with a single space
+                       compare, flags=re.VERBOSE)
+
+        url = "http://knowyourmeme.com/search?context=entries&sort=relevance&q=" + clean.replace(" ", "+")
+
+        print(url)
+
         url_open = urllib.urlopen(url)
 
         search_soup = bs4.BeautifulSoup(url_open, "html.parser")
@@ -40,17 +52,17 @@ class MyLogicAdapter(LogicAdapter):
         table = search_soup.find("table", class_="entry_list")
 
         if table is None:
-            return 0, Statement("I couldn't find a meme for that!")
+            return 0, Statement("I couldn't find a meme for that! Error: 1")
 
-        first_row = table.find("td")
+        first_row = table.find("tr")
 
         if first_row is None:
-            return 0, Statement("I couldn't find a meme for that!")
+            return 0, Statement("I couldn't find a meme for that! Error: 2")
 
         meme = first_row.find("td")
 
         if meme is None:
-            return 0, Statement("I couldn't find a meme for that!")
+            return 0, Statement("I couldn't find a meme for that! Error: 3")
 
         anchor = meme.find("h2").find("a")
 
@@ -63,18 +75,26 @@ class MyLogicAdapter(LogicAdapter):
         meme_page = bs4.BeautifulSoup(urllib.urlopen(meme_url).read(), "html.parser").find("section", class_="bodycopy")
 
         if meme_page is None:
-            return 0, Statement("I couldn't find a meme for that!")
+            return 0, Statement("I couldn't find a meme for that! Error: 4")
 
         image_list = meme_page.find_all("img")
 
         image = None
 
         if image_list:
-            image= image_list[0]["href"]
+            image = image_list[0].get("data-src", "")
 
         message = ""
 
-        statement = Statement("I found a photo, '%s', a webiste, '%s' and this content:\n\n%s" % (image, meme_url, message))
+        all_ps = meme_page.find_all("p")
+
+        for para in all_ps:
+            message += (para.getText() + "\n")
+
+        message = re.sub(r'\[[^)]*\]', '', message)
+
+        statement = Statement(
+            "I found a photo, '%s', a webiste, '%s' and this content:\n\n%s" % (image, meme_url, message))
 
         # Randomly select a confidence between 0 and 1
         confidence = 1
@@ -85,12 +105,11 @@ class MyLogicAdapter(LogicAdapter):
         return confidence, selected_statement
 
 
-
 app = Flask(__name__)
 
 english_bot = ChatBot("English Bot", logic_adapters=(
     {
-            'import_path': 'chat_bot.MyLogicAdapter'
+        'import_path': 'chat_bot.MyLogicAdapter'
     },
     {
         "import_path": "chatterbot.logic.MathematicalEvaluation"
@@ -126,6 +145,19 @@ def home():
     query = json["message"]
     response = str(english_bot.get_response(query))
     d = {"response": response}
+
+    chat_key = json["chat_key"]
+
+    # send user's message
+    data = urllib.parse.urlencode({"text": query, "sender": "user"}).encode()
+    req = urllib.request.Request("http://127.0.0.1:8000/discover/chat/%s/add" % chat_key, data=data)
+    resp = urllib.request.urlopen(req)
+
+    # Send meme cat's message
+    data = urllib.parse.urlencode({"text": response, "sender": "memecat"}).encode()
+    req = urllib.request.Request("http://127.0.0.1:8000/discover/chat/%s/add" % chat_key, data=data)
+    resp = urllib.request.urlopen(req)
+
     return jsonify(**d)
 
 
