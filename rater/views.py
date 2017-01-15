@@ -122,6 +122,11 @@ def upvote(request):
         account.save()
         request.user.save()
         messages.success(request, "You two are a match! Go to chat and check them out!")
+        chat = ChatRoom.objects.create()
+        chat.users.add(account)
+        chat.users.add(request.user)
+        chat.save()
+        return redirect("rater:chat", chat_key=chat.key)
 
     return redirect("rater:index")
 

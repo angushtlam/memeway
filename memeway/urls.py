@@ -59,7 +59,7 @@ def register_controller(request):
     chat.users.add(user)
     chat.save()
 
-    message = Message.objects.create(text="I am memecat, your savior and helper of all things memes!",
+    message = Message.objects.create(text="I am memecat, hear me RAWR. I am your savior and helper of all things memes! Ask any of your questions here!",
                                      sender=memecat, chat=chat)
     message.save()
 
