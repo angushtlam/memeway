@@ -130,6 +130,10 @@ class User(AbstractBaseUser):
 
     # memes = ForeignKey(ChosenMeme)
 
+    downvotes = models.IntegerField(default=0)
+
+    last_viewed = models.ForeignKey("self", related_name="last_viewed_me")
+
     memes = models.ManyToManyField(MemeImage, related_name="users_who_liked", blank=True)
 
     liked = models.ManyToManyField("self", blank=True, related_name="liked_me", symmetrical=False)

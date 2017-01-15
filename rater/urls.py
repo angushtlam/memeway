@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^random$', random_meme, name="random"),
     url(r'^random-ten$', load_ten_random, name="random_ten"),
     url(r'^save-meme$', save_meme_to_account, name="save_meme"),
+    url(r'^upvote$', upvote, name="upvote"),
+    url(r'^downvote$', downvote, name="downvote"),
 ]
