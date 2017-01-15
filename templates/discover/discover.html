@@ -21,11 +21,12 @@
 		<br />
 		<p>You are viewing the profile of</p>
 		<h1>{{ account.username }}</h1>
+		<p>{{ account.description }}</p>
 		<hr />
 		<h3>User Since</h3>
 		<p>{{ account.created_on }}</p>
 		
-		<p>{{ account.liked_me.count }} likes</p>
+		<p>{{ account.liked_me.count }} like{% if account.liked_me.count != 1 %}s{% endif %}</p>
 
 		<div class="fabs">
 			<a href="{% url 'rater:downvote' %}"><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
