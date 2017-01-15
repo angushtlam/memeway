@@ -22,3 +22,56 @@ body {
 	text-align: center;
 	padding: 15px 0;
 }
+
+.grid {
+	margin-left: 5%;
+}
+
+.grid-sizer,
+.meme {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.meme.selected img {
+	border: 8px solid #ff4489;
+}
+
+@media only screen and (min-width: 768px) {
+	.grid-sizer,
+	.meme {
+		width: 48%;
+	}
+}
+
+@media only screen and (min-width : 992px) {
+	.grid-sizer,
+	.meme {
+		width: 32%;
+	}
+}
+
+.meme img {
+	border-radius: 3px;
+  width: 100%;
+  height: auto;
+}
+
+/* FAB Continue Button */
+.fab-continue {
+	background-color: #419641;
+	border-radius: 50%;
+	bottom: 30px;
+	height: 100px;
+	position: fixed;
+	right: 30px;
+	width: 100px;
+}
+
+.fab-continue span {
+	color: #fff;
+	display: block;
+	font-size: 60px;
+	text-align: center;
+	width: 100%;
+}

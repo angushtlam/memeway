@@ -16,9 +16,29 @@
 
 <div class="content">
 	<div class="container">
-		<p>Pick some of your favorites, and when you're ready, </p>
+		<p>Pick some of your favorites, and when you're ready, hit the continue button!</p>
+	
+
+	<div class="meme-grid">
+		<div class="grid-sizer"></div>
+		{% for img in images %}
+			<div class="meme">
+				<img meme-id="{{ img.id }}" src="{{ img.url }}" title="{{ img.meme.title }}" />
+			</div>
+		{% endfor %}
+	</div>
+	<br />
+
+	<button type="button" class="btn btn-secondary">Load More...</button>
 	</div>
 </div>
+
+<div class="fab-continue"><span>></span></div>
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/csrf.js' %}""></script>
+<script src="{% static 'lib/masonry/imagesloaded.min.js' %}""></script>
+<script src="{% static 'lib/masonry/masonry.min.js' %}""></script>
+<script src="{% static 'scripts/welcome.js' %}""></script>
+{% endblock %}
