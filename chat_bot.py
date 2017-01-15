@@ -107,6 +107,8 @@ class MyLogicAdapter(LogicAdapter):
 
 app = Flask(__name__)
 
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 english_bot = ChatBot("English Bot", logic_adapters=(
     {
         'import_path': 'chat_bot.MyLogicAdapter'
