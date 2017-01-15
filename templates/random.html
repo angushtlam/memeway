@@ -1,80 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-
+{% extends 'components/base.html' %}
 {% load static from staticfiles %}
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
 
-    <style>
+{% block styles %}
+<link href="{% static 'styles/random.css' %}" rel="stylesheet">
+<link href="{% static 'lib/animatecss/animate.css' %}" rel="stylesheet">
+{% endblock %}
 
-        html {
-            background: #c0b8bf;
-        }
-
-        body {
-            overflow: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 10px;
-        }
-
-        .image {
-            display: block;
-            margin: 5vh auto auto;
-            max-height: 50vh;
-            min-height: 30vh;
-        }
-
-        form {
-            width: 60%;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        button {
-            display: inline;
-            margin: 3em auto 0;
-            padding: 2em;
-        }
-
-        .green {
-            background: #00c900;
-            color: #006900;
-            font-size: larger;
-        }
-
-        .red {
-            background: #eb0100;
-            color: #8a0100;
-            font-size: larger;
-        }
-
-        h1 {
-            font-family: 'Comic Sans MS', san-serif;
-        }
-
-    </style>
-</head>
-<body>
-
-<h1 align="center">Rate this Meme</h1>
-<div>
-    <img alt="IF YOU SEE THIS, DOWNVOTE ME." class="image" src="{{ url }}">
+{% block content %}
+<div class="page-background"></div>
+<div class="random-meme-curator">
+    <div class="nav-top">
+        <div class="btn-group btn-group-wide" role="group">
+            <a href="{% url 'logout' %}" role="button" class="btn btn-secondary"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            <a href="{% url 'rater:index' %}" role="button" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i></a>
+            <a href="{% url 'rater:chat_room_init' %}" role="button" class="btn btn-secondary"><i class="fa fa-comments" aria-hidden="true"></i></a>
+            <a href="{% url 'rater:random' %}" role="button" class="btn btn-primary"><i class="fa fa-random" aria-hidden="true"></i></a>
+            <a href="{% url 'rater:my_account' %}" role="button" class="btn btn-secondary"><i class="fa fa-cog" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="meme-card animated slideInDown">
+        <div class="meme-card-content">
+            <img class="meme-img img-fluid" src="{{ url }}" />
+        </div>
+    </div>
+    <div class="meme-vote">
+        <div class="fabs">
+<!--             <form method="post" action="{% url 'rater:random' %}">
+                {% csrf_token %}
+                <input type="hidden" value="{{ pk }}" name="pk">
+                <input type="hidden" name="quality" id="quality" value="1">
+                <button class="green" style="margin-right: 1em" type="button">Good!</button>
+                <button class="red" type="button">Bad!</button>
+            </form> -->
+            <a><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
+            <a><div class="fab fab-like"><i class="fa fa-bookmark" aria-hidden="true"></i></div></a>
+            <a><div class="fab fab-next"><i class="fa fa-fast-forward" aria-hidden="true"></i></div></a>
+        </div>
+    </div>
 </div>
 
-<div>
-    <form method="post" action="{% url 'rater:random' %}">
-        {% csrf_token %}
-        <input type="hidden" value="{{ pk }}" name="pk">
-        <input type="hidden" name="quality" id="quality" value="1">
-        <button class="green" style="margin-right: 1em" type="button">Good!</button>
-        <button class="red" type="button">Bad!</button>
-    </form>
-</div>
 
-<script src="{% static 'lib/jquery/jquery-3.1.1.min.js' %}"></script>
+{% endblock %}
 
+{% block scripts %}
+<script src="{% static 'scripts/csrf.js' %}"></script>
+<script src="{% static 'lib/masonry/imagesloaded.min.js' %}"></script>
+<script src="{% static 'lib/masonry/masonry.min.js' %}"></script>
+<script src="{% static 'scripts/discover/discover.js' %}"></script>
 <script>
     $(document).ready(function () {
 
@@ -92,6 +64,4 @@
 
     });
 </script>
-
-</body>
-</html>
+{% endblock %}
