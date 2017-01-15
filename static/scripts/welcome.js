@@ -35,9 +35,9 @@ $(document).ready(function () {
 				$.ajax({
 				  type: 'POST',
 				  url: '/discover/save-meme',
-				  data: {
+				  data: JSON.stringify({
 				  	'image-id': 'memeId'
-				  },
+				  }),
 				  error: function (xhr, status, errorThrown) {
 				  	alert(errorThrown);
 				  },
