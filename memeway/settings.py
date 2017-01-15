@@ -14,7 +14,7 @@ import dj_database_url
 import os
 
 ENV = {
-    "DEBUG": False if os.getenv("DEBUG", "True") == "False" else True,
+    "DEBUG": False,
     "SECRET": ')_*^w!-p1a@puy+gonw+scc@r4a0ze7%j%bshg$#)pmws9%^bs'
 }
 
