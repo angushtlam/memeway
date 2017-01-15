@@ -16,7 +16,7 @@ $('#chat-input-form').submit(function (event) {
     var chatKey = $('#chat-key').html();
 
     var data = {
-    	text: $('#chat-message-field').val(),
+    	message: $('#chat-message-field').val(),
     	chat_key: chatKey
     };
 

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from flask.ext.cors import CORS
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer, ListTrainer
 import urllib.request, urllib.parse
