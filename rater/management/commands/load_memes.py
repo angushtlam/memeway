@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 import bs4
 import urllib.request
+from time import sleep
 
 from rater.models import Meme, MemeImage
 
@@ -24,6 +25,10 @@ class Command(BaseCommand):
         BLOCKED = ["shantae"]
 
         pages = options['pages']
+
+        # Start fresh
+        for meme in Meme.objects.all():
+            meme.delete()
 
         # Iterate through all the pages
         for page in range(1, pages+1):
@@ -76,5 +81,7 @@ class Command(BaseCommand):
                 print("Successfully created %s meme with %s image(s)." % (meme_obj.title, len(meme_obj.images.all() )))
 
             print("")
+
+            sleep(0.1)
 
         self.stdout.write(self.style.SUCCESS('Successfully got all the memes.'))
