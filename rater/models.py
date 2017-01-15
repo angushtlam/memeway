@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 import random
 from django.db.models import CASCADE
+from memeway import random_generator
 
 
 class Tag(models.Model):
@@ -137,7 +138,7 @@ class User(AbstractBaseUser):
 
     # memes = ForeignKey(ChosenMeme)
 
-    memes = models.ManyToManyField(MemeImage, related_name="users_who_liked")
+    memes = models.ManyToManyField(MemeImage, related_name="users_who_liked", blank=True)
 
     liked = models.ManyToManyField("self", blank=True, related_name="liked_me")
 
@@ -185,3 +186,25 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class ChatRoom(models.Model):
+
+    key = models.CharField(default=random_generator, max_length=16)
+
+    user_1 = models.ForeignKey(User, related_name="chats")
+
+    user_2 = models.ForeignKey(User, related_name="ignore_me_ignore_me")
+
+    class Meta:
+        db_table = "chatrooms"
+
+
+class Message(models.Model):
+
+    text = models.TextField(default="")
+
+    sender = models.ForeignKey(User, related_name="sent_messages", on_delete=CASCADE)
+
+    class Meta:
+        db_table = "messages"

@@ -7,6 +7,15 @@ from django.views.decorators.csrf import csrf_exempt
 from rater.models import *
 
 
+def get_chat(user, chat_key):
+    chat = user.chats.filter(key=chat_key).first()
+
+    if chat is None:
+        chat = user.ignore_me_ignore_me.filter(key=chat_key).first()
+
+    return chat
+
+
 @login_required
 def index(request):
     if len(request.user.memes.all()) > 0:
@@ -54,7 +63,6 @@ def load_ten_random(request):
 
 
 @login_required
-@csrf_exempt
 def save_meme_to_account(request):
 
     if not request.user.is_authenticated:
@@ -95,3 +103,14 @@ def random_meme(request):
     image = random.choice(meme.images.all())
 
     return render(request, "random.html", {"url": image.url, 'pk': image.id, "title": meme.title})
+
+
+@login_required
+def chat_room(request, chat_key):
+    chat = get_chat(request.user, chat_key)
+
+    if chat is None:
+        return redirect("rater:index")
+
+    chats = request.user.chats.all()
+    return render(request, "discover/chat.html", {"chats": chats})

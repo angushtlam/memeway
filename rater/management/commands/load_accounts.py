@@ -12,6 +12,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        for user in User.objects.all():
+            if user.username != "dan":
+                user.delete()
+
         accounts = options['accounts']
 
         for num in range(0, accounts):
