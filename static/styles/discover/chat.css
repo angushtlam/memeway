@@ -108,6 +108,11 @@ body {
 	width: 100px;
 }
 
+.chat-username {
+	display: inline;
+	margin-right: 15px;
+}
+
 /* FABs */
 .fabs {
 	text-align: center;
