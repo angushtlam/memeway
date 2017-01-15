@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 import random
 from django.db.models import CASCADE
+from django.utils import timezone
 from memeway import random_generator
 
 
@@ -128,6 +129,8 @@ class User(AbstractBaseUser):
     gender = models.CharField(default="m", max_length=2, help_text="Gender for the user's match.",
                                     choices=GENDER_CHOICES)
 
+    description = models.TextField(default="My life is a meme 'cuz I have no description!")
+
     # memes = ForeignKey(ChosenMeme)
 
     downvotes = models.IntegerField(default=0)
@@ -145,6 +148,8 @@ class User(AbstractBaseUser):
 
     # If they are P+P admin
     is_admin = models.BooleanField(default=False)
+
+    created_on = models.DateField(default=timezone.now)
 
     objects = MyUserManager()
 
@@ -187,12 +192,16 @@ class ChatRoom(models.Model):
 
     key = models.CharField(default=random_generator, max_length=16)
 
-    user_1 = models.ForeignKey(User, related_name="chats")
-
-    user_2 = models.ForeignKey(User, related_name="ignore_me_ignore_me")
+    users = models.ManyToManyField(User, related_name="chats")
 
     class Meta:
         db_table = "chatrooms"
+
+    def get_other_user(self, user):
+        users = self.users.all()
+        if user == users[0]:
+            return users[1]
+        return users[0]
 
 
 class Message(models.Model):

@@ -55,12 +55,6 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class ChatInline(admin.TabularInline):
-    model = ChatRoom
-    extra = 0
-    fk_name = 'user_1'
-
-
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -89,8 +83,6 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('username',)
     filter_horizontal = ()
 
-    inlines = [ChatInline,]
-
 
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
@@ -118,4 +110,4 @@ class MemeAdmin(admin.ModelAdmin):
 
 @admin.register(ChatRoom)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ("user_1", "user_2", "key")
+    list_display = ("key",)

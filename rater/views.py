@@ -9,21 +9,11 @@ from rater.models import *
 
 def get_chat(user, chat_key):
     chat = user.chats.filter(key=chat_key).first()
-
-    if chat is None:
-        chat = user.ignore_me_ignore_me.filter(key=chat_key).first()
-
     return chat
 
 
 def random_chat(user):
     chat = random.choice(user.chats.all())
-
-    print(chat)
-
-    if chat is None:
-        chat = random.choice(user.ignore_me_ignore_me.all())
-        print(chat)
     return chat
 
 
@@ -49,7 +39,7 @@ def index(request):
     # else:
     account = random.choice(User.objects.all())
 
-    while account == request.user:
+    while account == request.user or (account in request.user.liked.all() or account in request.user.matches.all()):
         account = random.choice(User.objects.all())
 
     request.user.last_viewed = account

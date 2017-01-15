@@ -54,7 +54,9 @@ def register_controller(request):
     user.liked.add(memecat)
     user.save()
 
-    chat = ChatRoom.objects.create(user_1=memecat, user_2=user)
+    chat = ChatRoom.objects.create()
+    chat.users.add(memecat)
+    chat.users.add(user)
     chat.save()
 
     message = Message.objects.create(text="I am memecat, your savior and helper of all things memes!",
