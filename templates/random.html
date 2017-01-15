@@ -25,17 +25,16 @@
     </div>
     <div class="meme-vote">
         <div class="fabs">
-<!--             <form method="post" action="{% url 'rater:random' %}">
+             <form method="post" style="display: none" action="{% url 'rater:random' %}">
                 {% csrf_token %}
                 <input type="hidden" value="{{ pk }}" name="pk">
                 <input type="hidden" name="quality" id="quality" value="1">
-                <button class="green" style="margin-right: 1em" type="button">Good!</button>
-                <button class="red" type="button">Bad!</button>
-            </form> -->
+            </form>
             <a><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
             <a><div class="fab fab-like"><i class="fa fa-bookmark" aria-hidden="true"></i></div></a>
             <a><div class="fab fab-next"><i class="fa fa-fast-forward" aria-hidden="true"></i></div></a>
         </div>
+
     </div>
 </div>
 

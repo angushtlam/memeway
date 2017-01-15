@@ -28,7 +28,7 @@ class Command(BaseCommand):
             if num == 0:
                 username = "memecat"
             else:
-                username = "User " + random_generator(5)
+                username = "User" + random_generator(5)
 
             user = User.objects.create_user(username, password=random_generator())
 
