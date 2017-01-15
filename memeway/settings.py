@@ -14,7 +14,7 @@ import dj_database_url
 import os
 
 ENV = {
-    "DEBUG": False if os.getenv("DEBUG", "True") == "False" else True,
+    "DEBUG": True,
     "SECRET": ')_*^w!-p1a@puy+gonw+scc@r4a0ze7%j%bshg$#)pmws9%^bs'
 }
 
@@ -96,9 +96,9 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
+# if not DEBUG:
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
