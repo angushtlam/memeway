@@ -31,6 +31,11 @@ body {
 	padding: 15px;
 }
 
+.nav-top {
+	background-color: #fff;
+	padding: 15px;
+}
+
 /* FABs */
 .fab {
 	margin: 0 15px;

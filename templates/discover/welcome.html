@@ -21,14 +21,11 @@
 		<div class="meme-grid">
 			<div class="grid-sizer"></div>
 			{% for img in images %}
-				<div class="meme" data-meme-id="{{ img.id }}">
-					<img src="{{ img.url }}" title="{{ img.meme.title }}" />
-				</div>
+			<div class="meme" data-meme-id="{{ img.id }}">
+				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
+			</div>
 			{% endfor %}
 		</div>
-		<br />
-
-		<button type="button" class="btn btn-secondary">Load More...</button>
 		<br />
 		<br />
 	</div>

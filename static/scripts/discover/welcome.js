@@ -25,7 +25,7 @@ $(document).ready(function () {
 	$('.fab-continue').click(function () {
 		var selectedMemes = $('.meme.selected');
 		if (selectedMemes.length < 5) {
-			alert('Pick at least 5!');
+			alertify.alert('Pick at least 5!');
 		} else {
 			var data = [];
 
