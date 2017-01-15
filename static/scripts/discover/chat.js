@@ -7,9 +7,8 @@ $(document).ready(function () {
 });
 
 $('#chat-input-form').submit(function (event) {
+
     if ($("#talking-to").html() == "memecat") {
-        var formId = this.id,
-            form = this;
 
         event.preventDefault();
 
@@ -33,8 +32,6 @@ $('#chat-input-form').submit(function (event) {
             dataType: 'text',
             contentType: 'application/json'
         });
-
-    } else {
 
     }
 });
