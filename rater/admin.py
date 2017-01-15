@@ -67,7 +67,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
+        (None, {'fields': ('username', 'password', 'description')}),
         ("Memes", {'fields': ("memes", "downvotes", "liked", "matches")}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
@@ -76,7 +76,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2')}
+            'fields': ('username', 'password1', 'password2', 'description')}
          ),
     )
     search_fields = ('username',)
