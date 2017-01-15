@@ -12,32 +12,33 @@
             <h1>Register</h1>
             <p>Join the greatest social network since MySpace.</p>
 
-            <form>
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Username</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" placeholder="This is the username you will be seen as online.">
+                        <input class="form-control" name="username" type="text" placeholder="This is the username you will be seen as online.">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="example-password-input" class="col-2 col-form-label">Password</label>
                     <div class="col-10">
-                        <input class="form-control" type="password" placeholder="We believe in you to enter it correctly the first time.">
+                        <input class="form-control" name="password" type="password" placeholder="We believe in you to enter it correctly the first time.">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Email</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" placeholder="We will not spam you with emails or share it with 3rd parties!">
+                        <input class="form-control" name="email" type="text" placeholder="We will not spam you with emails or share it with 3rd parties!">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Gender</label>
                     <div class="col-10">
-                        <select class="form-control" id="exampleSelect1">
+                        <select class="form-control" name="gender" id="exampleSelect1">
                             <option>Female</option>
                             <option>Male</option>
                             <option>Non-Binary</option>
@@ -51,7 +52,7 @@
                     <div class="col-sm-10">
                         <div class="form-check">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox"> I accept all Terms of Service and Privacy Policy.
+                            <input class="form-check-input" type="checkbox"> I accept all Terms of Service and Privacy Policy (as we make them up)
                             </label>
                         </div>
                     </div>

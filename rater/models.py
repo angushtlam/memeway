@@ -129,7 +129,7 @@ class User(AbstractBaseUser):
         ("a", "All"),
     )
 
-    gender_match = models.CharField(default="m", max_length=2, help_text="Gender for the user's match.",
+    gender = models.CharField(default="m", max_length=2, help_text="Gender for the user's match.",
                                     choices=GENDER_CHOICES)
 
     first_name = models.CharField(default="", max_length=128, help_text="The user's first name.")

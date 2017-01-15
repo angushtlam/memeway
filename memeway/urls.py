@@ -34,7 +34,9 @@ def session(request):
 def register_controller(request):
     if request.method != "POST":
         redirect("session")
-    pass
+    username = request.POST.get("username", "")
+    password = request.POST.get("password", "")
+    gender = request.POST.get("gender", "")
 
 
 def login_controller(request):
