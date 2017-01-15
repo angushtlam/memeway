@@ -181,3 +181,8 @@ def chat_room_add(request, chat_key):
     return redirect("rater:chat", chat_key=chat_key)
 
 
+@login_required
+def my_account(request):
+    return render(request, "discover/my_account.html", {"account": request.user})
+
+

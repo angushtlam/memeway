@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     url(r'^$', index, name="index"),
     url(r'^welcome$', welcome, name="welcome"),
+    url(r'^my-account$', my_account, name="my_account"),
     url(r'^chat$', chat_room_init, name="chat_room_init"),
     url(r'^chat/(?P<chat_key>[0-9A-Za-z]+)$', chat_room, name="chat"),
     url(r'^chat/(?P<chat_key>[0-9A-Za-z]+)/add$', chat_room_add, name="chat_add"),

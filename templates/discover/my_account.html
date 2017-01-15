@@ -1,0 +1,57 @@
+{% extends 'components/base.html' %}
+{% load static from staticfiles %}
+
+{% block styles %}
+<link href="{% static 'styles/discover/discover.css' %}" rel="stylesheet">
+<link href="{% static 'lib/animatecss/animate.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="user-profile animated slideInDown">
+	<div class="user-profile-body">
+		<div class="nav-top">
+			<div class="btn-group btn-group-wide" role="group">
+			  <a href="{% url 'logout' %}" role="button" class="btn btn-secondary"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+			  <a href="{% url 'rater:index' %}" role="button" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i></a>
+			  <a href="{% url 'rater:chat_room_init' %}" role="button" class="btn btn-secondary"><i class="fa fa-comments" aria-hidden="true"></i></a>
+			  <a href="{% url 'rater:random' %}" role="button" class="btn btn-secondary"><i class="fa fa-random" aria-hidden="true"></i></a>
+			  <a href="{% url 'rater:my_account' %}" role="button" class="btn btn-primary"><i class="fa fa-cog" aria-hidden="true"></i></a>
+			</div>
+		</div>
+		<br />
+		<p>This is how people will see you:</p>
+		<h1>{{ account.username }}</h1>
+		<hr />
+		<h3>You've been a user since</h3>
+		<p>{{ account.created_on }}</p>
+		
+		<p>{{ account.liked_me.count }} likes</p>
+
+		<div class="fabs">
+			<a href="{% url 'rater:downvote' %}"><div class="fab fab-pass"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div></a>
+			<a href="{% url 'rater:upvote' %}"><div class="fab fab-like"><i class="fa fa-heart" aria-hidden="true"></i></div></a>
+		</div>
+	</div>
+</div>
+<div class="user-memes">
+	<div class="meme-grid">
+		<div class="grid-sizer"></div>
+		{% for img in account.memes.all|slice:":10" %}
+			<div class="meme animated flipInX" data-meme-id="{{ img.id }}">
+				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="fab fab-continue disabled"><span>+</span></div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/csrf.js' %}""></script>
+<script src="{% static 'lib/masonry/imagesloaded.min.js' %}""></script>
+<script src="{% static 'lib/masonry/masonry.min.js' %}""></script>
+<script src="{% static 'scripts/discover/discover.js' %}"></script>
+{% endblock %}
