@@ -14,23 +14,16 @@ class Command(BaseCommand):
 
         names = ["diane", "jack", "jill", "bridget", "collin", "julia", "rainbowgurl", "xoxgirlxox"]
 
-        for user in User.objects.all():
-            if user.username not in ["dan", "angus"]:
-                user.delete()
-
-        for chat in ChatRoom.objects.all():
-            chat.delete()
-
         accounts = options['accounts']
 
         users = []
 
         for num in range(0, accounts):
 
-            if num == 0:
+            if num == 0 and User.objects.filter(username="memecat").first() is None:
                 username = "memecat"
             else:
-                username = random.choice(names) + str(num)
+                username = random.choice(names) + random_generator(4)
 
             user = User.objects.create_user(username, password=random_generator())
 
