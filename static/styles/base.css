@@ -7,7 +7,7 @@ body {
 }
 
 body {
-	font-family: 'Comic Sans MS', san-serif;
+	font-family: 'Comic Sans MS', Verdana, san-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn,
 input,
 textarea {
-	font-family: 'Comic Sans MS', san-serif !important;
+	font-family: 'Comic Sans MS', Verdana, san-serif !important;
 	border-radius: 0 !important;
 	padding: 15px !important;
 }
@@ -121,7 +121,7 @@ a:hover {
 
 /* Alertify */
 .alertify {
-	font-family: 'Comic Sans MS', san-serif !important;
+	font-family: 'Comic Sans MS', Verdana, san-serif !important;
 	border-width: 15px !important;
 	box-shadow: none !important;
 	border-radius: 3px !important;
@@ -135,7 +135,7 @@ a:hover {
 	background-color: #415e96 !important;
 	border: 1px solid #eee !important;
 	border-radius: 0 !important;
-	font-family: 'Comic Sans MS', san-serif !important;
+	font-family: 'Comic Sans MS', Verdana, san-serif !important;
 	text-shadow: 0 !important;
 	padding: 15px;
 }
