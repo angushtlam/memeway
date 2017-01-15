@@ -37,7 +37,7 @@ def index(request):
         account = random.choice(image_to_use.users_who_liked.all())
     else:
         account = random.choice(User.objects.all())
-    while account != request.user:
+    while account == request.user:
         if len(image_to_use.users_who_liked.all()) > 0:
             account = random.choice(image_to_use.users_who_liked.all())
         else:
