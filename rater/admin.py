@@ -16,7 +16,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name')
+        fields = ('username',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -46,7 +46,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'first_name', 'last_name', 'is_active', 'is_admin')
+        fields = ('username', 'password', 'is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -70,11 +70,10 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username', 'first_name', 'last_name', 'is_admin')
+    list_display = ('username', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name')}),
         ("Memes", {'fields': ("memes",)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
@@ -83,10 +82,10 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'first_name', 'last_name' 'password1', 'password2')}
+            'fields': ('username', 'password1', 'password2')}
          ),
     )
-    search_fields = ('username', 'last_name')
+    search_fields = ('username',)
     ordering = ('username',)
     filter_horizontal = ()
 
@@ -115,3 +114,8 @@ class MemeAdmin(admin.ModelAdmin):
     list_display = ("title", "number_picked")
     search_fields = ("title", "id")
     inlines = [MemeImageAdmin,]
+
+
+@admin.register(ChatRoom)
+class ChatAdmin(admin.ModelAdmin):
+    list_display = ("user_1", "user_2", "key")

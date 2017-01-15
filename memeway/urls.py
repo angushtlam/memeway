@@ -17,8 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.core.checks import messages
+from django.contrib import messages
 from django.shortcuts import render, redirect
+from rater.models import User, ChatRoom, Message
 
 
 def index(request):
@@ -34,9 +35,36 @@ def session(request):
 def register_controller(request):
     if request.method != "POST":
         redirect("session")
-    username = request.POST.get("username", "")
+
+    username = request.POST.get("username", "").lower()
     password = request.POST.get("password", "")
     gender = request.POST.get("gender", "")
+
+    if User.objects.filter(username=username).first():
+        messages.error(request, "Someone already took that username! :o")
+        return redirect("session")
+
+    user = User.objects.create_user(username, password)
+    user.gender = gender
+    user.save()
+
+    memecat = User.objects.filter(username="memecat").first()
+
+    user.matches.add(memecat)
+    user.liked.add(memecat)
+    user.save()
+
+    chat = ChatRoom.objects.create(user_1=memecat, user_2=user)
+    chat.save()
+
+    message = Message.objects.create(text="I am memecat, your savior and helper of all things memes!",
+                                     sender=memecat, chat=chat)
+    message.save()
+
+    user = authenticate(username=username, password=password)
+    login(request, user)
+
+    return redirect("rater:welcome")
 
 
 def login_controller(request):

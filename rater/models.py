@@ -64,7 +64,7 @@ class Meme(models.Model):
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, username, first_name, last_name, password=None):
+    def create_user(self, username, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -74,15 +74,13 @@ class MyUserManager(BaseUserManager):
 
         user = self.model(
             username=username.lower(),
-            first_name=first_name,
-            last_name=last_name,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, first_name, last_name, password):
+    def create_superuser(self, username, password):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -90,8 +88,6 @@ class MyUserManager(BaseUserManager):
         user = self.create_user(
             username,
             password=password,
-            first_name=first_name,
-            last_name=last_name,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -126,21 +122,17 @@ class User(AbstractBaseUser):
         ("m", "Male"),
         ("f", "Female"),
         ("a", "Bread"),
-        ("a", "All"),
+        ("o", "Other"),
     )
 
     gender = models.CharField(default="m", max_length=2, help_text="Gender for the user's match.",
                                     choices=GENDER_CHOICES)
 
-    first_name = models.CharField(default="", max_length=128, help_text="The user's first name.")
-
-    last_name = models.CharField(default="", max_length=128, help_text="The user's last name.")
-
     # memes = ForeignKey(ChosenMeme)
 
     memes = models.ManyToManyField(MemeImage, related_name="users_who_liked", blank=True)
 
-    liked = models.ManyToManyField("self", blank=True, related_name="liked_me")
+    liked = models.ManyToManyField("self", blank=True, related_name="liked_me", symmetrical=False)
 
     matches = models.ManyToManyField("self", blank=True, related_name="my_matches")
 
@@ -153,7 +145,6 @@ class User(AbstractBaseUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     class Meta:
         db_table = "users"
@@ -162,14 +153,14 @@ class User(AbstractBaseUser):
 
     def get_full_name(self):
         # The user is identified by their email address
-        return "%s %s %s" % (self.get_prefix_display(), self.first_name, self.last_name)
+        return self.username
 
     def get_short_name(self):
         # The user is identified by their email address
-        return "%s %s" % (self.first_name, self.last_name)
+        return self.username
 
     def __str__(self):              # __unicode__ on Python 2
-        return "%s : %s" % (self.get_short_name(), self.username)
+        return self.username
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

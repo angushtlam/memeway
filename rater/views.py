@@ -16,6 +16,14 @@ def get_chat(user, chat_key):
     return chat
 
 
+def random_chat(user):
+    chat = random.choice(user.chats.all())
+
+    if chat is None:
+        chat = random.choice(user.ignore_me_ignore_me.all())
+    return chat
+
+
 @login_required
 def index(request):
 
@@ -112,7 +120,7 @@ def random_meme(request):
 @login_required
 def chat_room_init(request):
     if len(request.user.chats.all()) > 0:
-        return redirect("rater:chat", chat_key=random.choice(request.user.chats.all()).key)
+        return redirect("rater:chat", chat_key=random_chat(request.user).key)
     messages.error(request, "You need to match with people before you can chat!")
     return redirect("rater:index")
 
