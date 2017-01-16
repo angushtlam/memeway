@@ -146,14 +146,12 @@ def random_meme(request):
                     meme_img.users_who_liked.add(request.user)
                 meme_img.save()
 
-    meme = random.choice(Meme.objects.all())
+    meme = random.choice(MemeImage.objects.all())
 
-    while len(meme.images.all()) == 0:
+    while meme not in request.user.memes.all():
         meme = random.choice(Meme.objects.all())
 
-    image = random.choice(meme.images.all())
-
-    return render(request, "random.html", {"url": image.url, 'pk': image.id, "title": meme.title})
+    return render(request, "random.html", {"url": meme.url, 'pk': meme.id, "title": meme.meme.title})
 
 
 @login_required
