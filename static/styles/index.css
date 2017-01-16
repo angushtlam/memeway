@@ -18,10 +18,21 @@
 
 .title {
 	color: #fff;
-	font-size: 90px !important;
+	font-size: 52px !important;
 }
 
 .subtitle {
 	color: #fff;
-	font-family: 'Comic Sans MS', san-serif;
+	font-family: 'Comic Sans MS', Verdana, san-serif;
+	font-size: 18px !important;
+}
+
+@media only screen and (min-width : 992px) {
+	.title {
+		font-size: 90px !important;
+	}
+
+	.subtitle {
+		font-size: 32px !important;
+	}
 }
