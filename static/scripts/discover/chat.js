@@ -34,7 +34,7 @@ $('#chat-input-form').submit(function (event) {
 
         $.ajax({
             type: 'POST',
-            url: 'https://127.0.0.1:5000',
+            url: 'http://127.0.0.1:5000',
             data: JSON.stringify(data),
             error: function (xhr, status, errorThrown) {
                 alert(errorThrown);
