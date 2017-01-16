@@ -18,37 +18,24 @@ def random_chat(user):
     return chat
 
 
+def get_random(user):
+    """
+    This will remove all matches from the users
+    :param user:
+    :return:
+    """
+    all_users = User.objects.exclude(username=user.username).exclude(username=user.last_viewed.username).all()
+    matches = user.matches.all()
+    return [user for user in all_users if user not in matches]
+
+
 @login_required
 def index(request):
 
     if len(request.user.memes.all()) == 0:
         return redirect("rater:welcome")
 
-    # if len(request.user.memes.all()) > 0:
-    #     meme_to_compare = random.choice(request.user.memes.all())
-    # else:
-    #     meme_to_compare = random.choice(MemeImage.objects.all())
-    #
-    # tag_to_compare = random.choice(meme_to_compare.meme.tags.all())
-    #
-    # meme_to_use = random.choice(tag_to_compare.memes.all())
-    #
-    # image_to_use = random.choice(meme_to_use.images.all())
-    #
-    # if len(image_to_use.users_who_liked.all()) > 0:
-    #     account = random.choice(image_to_use.users_who_liked.all())
-    # else:
-    account = random.choice(User.objects.all())
-
-    count = 0
-    while count < 30 and (account == request.user or (account in request.user.liked.all() or account in request.user.matches.all())):
-        account = random.choice(User.objects.all())
-        count += 1
-
-    if count >= 30:
-        account = random.choice(User.objects.all())
-        while request.user == account:
-            return random.choice(User.objects.all())
+    account = random.choice(get_random(request.user))
 
     request.user.last_viewed = account
     request.user.save()
@@ -97,7 +84,7 @@ def save_meme_to_account(request):
         if image not in request.user.memes.all():
             image.users_who_liked.add(request.user)
 
-    image.save()
+        image.save()
 
     return JsonResponse({"response": "ok", "message": "Ya memes are poppin' for good now!"})
 
@@ -118,15 +105,24 @@ def upvote(request):
     request.user.save()
 
     if request.user in account.liked.all():
-        request.user.matches.add(account)
-        account.matches.add(request.user)
-        account.save()
-        request.user.save()
-        messages.success(request, "You two are a match! Go to chat and check them out!")
-        chat = ChatRoom.objects.create()
-        chat.users.add(account)
-        chat.users.add(request.user)
-        chat.save()
+
+        in_chat = False
+
+        # See if there is already an existing chat
+        for chat in request.user.chats.all():
+            if account in chat.users.all():
+                in_chat = True
+
+        if not in_chat:
+            request.user.matches.add(account)
+            account.matches.add(request.user)
+            account.save()
+            request.user.save()
+            messages.success(request, "You two are a match! Go to chat and check them out!")
+            chat = ChatRoom.objects.create()
+            chat.users.add(account)
+            chat.users.add(request.user)
+            chat.save()
     return redirect("rater:index")
 
 

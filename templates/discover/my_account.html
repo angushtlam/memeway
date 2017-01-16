@@ -52,7 +52,7 @@
 <div class="user-memes">
 	<div class="meme-grid">
 		<div class="grid-sizer"></div>
-		{% for img in account.memes.all %}
+		{% for img in account.memes.all reversed %}
 			<div class="meme animated flipInX" data-meme-id="{{ img.id }}">
 				<img src="{{ img.url }}" title="{{ img.meme.title }}" />
 			</div>

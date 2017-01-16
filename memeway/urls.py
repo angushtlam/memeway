@@ -48,21 +48,6 @@ def register_controller(request):
     user.gender = gender
     user.save()
 
-    memecat = User.objects.filter(username="memecat").first()
-
-    user.matches.add(memecat)
-    user.liked.add(memecat)
-    user.save()
-
-    chat = ChatRoom.objects.create()
-    chat.users.add(memecat)
-    chat.users.add(user)
-    chat.save()
-
-    message = Message.objects.create(text="I am memecat, hear me RAWR. I am your savior and helper of all things memes! Ask any of your questions here!",
-                                     sender=memecat, chat=chat)
-    message.save()
-
     user = authenticate(username=username, password=password)
     login(request, user)
 
