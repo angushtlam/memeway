@@ -39,6 +39,7 @@ def register_controller(request):
     username = request.POST.get("username", "").lower()
     password = request.POST.get("password", "")
     gender = request.POST.get("gender", "")
+    email = request.POST.get("email", "")
 
     if User.objects.filter(username=username).first():
         messages.error(request, "Someone already took that username! :o")
@@ -46,6 +47,7 @@ def register_controller(request):
 
     user = User.objects.create_user(username, password)
     user.gender = gender
+    user.email = email
     user.save()
 
     user = authenticate(username=username, password=password)
@@ -59,7 +61,7 @@ def login_controller(request):
         return redirect("rater:index")
     if request.method != "POST":
         return render(request, "login.html")
-    username = request.POST.get("username", "")
+    username = request.POST.get("username", "").lower()
     password = request.POST.get("password", "")
     user = authenticate(username=username, password=password)
 
@@ -80,9 +82,34 @@ def logout_controller(request):
     return redirect("index")
 
 
+def session_forgot(request):
+
+    # Send email to user with forgot link and code
+
+    # Set can_reset to true
+
+    pass
+
+
+def handle_reset(request):
+
+    # Check if can_reset is true
+
+    # If not, redirect the f' outta there
+
+    # Reset the password with new
+
+    # Regenerate the two email codes
+
+    # Inform user via messages
+
+    pass
+
+
 urlpatterns = [
     url(r'^$', index, name="index"),
     url(r'^session$', session, name="session"),
+    url(r'^session/forgot$', session_forgot, name="session_forgot"),
     url(r'^session/register$', register_controller, name="register"),
     url(r'^session/login$', login_controller, name="login"),
     url(r'^logout$', logout_controller, name="logout"),

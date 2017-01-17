@@ -165,6 +165,13 @@ class User(AbstractBaseUser):
     gender = models.CharField(default="m", max_length=2, help_text="Gender for the user's match.",
                                     choices=GENDER_CHOICES)
 
+    email = models.EmailField(default="", max_length=128)
+
+    # Password Reset Stuff
+    can_rest_password = models.BooleanField(default=False, help_text="")
+    email_link = models.CharField(default=random_generator, max_length=16)
+    code_reset = models.CharField(default=random_generator, max_length=16)
+
     description = models.TextField(default="My life is a meme 'cuz I have no description!")
 
     # memes = ForeignKey(ChosenMeme)
