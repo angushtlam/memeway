@@ -48,6 +48,9 @@ def register_controller(request):
     user = User.objects.create_user(username, password)
     user.gender = gender
     user.email = email
+
+    # Just cus it needs filled
+    user.last_viewed = User.objects.filter(username="dan").first()
     user.save()
 
     user = authenticate(username=username, password=password)
