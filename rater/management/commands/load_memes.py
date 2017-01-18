@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
             print("***** PAGE %s *****" % page)
 
-            url = "http://knowyourmeme.com/memes/page/%s" % page
+            url = "http://knowyourmeme.com/memes/all/page/%s" % page
             r = urllib.request.urlopen(url).read()
 
             # The bs4 soup that has the page of memes
@@ -89,8 +89,10 @@ class Command(BaseCommand):
 
                     print("Successfully created %s meme with %s image(s)." % (meme_obj.title, len(meme_obj.images.all() )))
 
+                sleep(.1)
+
             print("")
 
-            sleep(0.1)
+            sleep(1)
 
         self.stdout.write(self.style.SUCCESS('Successfully got all the memes.'))
