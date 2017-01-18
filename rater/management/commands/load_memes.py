@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
                 anchor = meme.find("h2").find("a")
 
-                name = anchor.contents[0]
+                name = anchor.contents[0][:256]
 
                 # Skip if already seen
                 if Meme.objects.filter(title=name).first():
