@@ -14,9 +14,10 @@ class Command(BaseCommand):
 
         parser.add_argument(
             '--start',
-            action='store_true',
-            dest='delete',
-            default=False,
+            action='store',
+            dest='start',
+            default=1,
+            type=int,
             help='Start page',
         )
 
@@ -25,9 +26,10 @@ class Command(BaseCommand):
         BLOCKED = ["shantae", "zettai"]
 
         pages = options['pages']
+        start = options['start']
 
         # Iterate through all the pages
-        for page in range(1, pages+1):
+        for page in range(start, pages+1):
 
             print("***** PAGE %s *****" % page)
 
