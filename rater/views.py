@@ -145,7 +145,7 @@ def random_meme(request):
     meme = random.choice(MemeImage.objects.all())
 
     while meme in request.user.memes.all():
-        meme = random.choice(Meme.objects.all())
+        meme = random.choice(MemeImage.objects.all())
 
     return render(request, "random.html", {"url": meme.url, 'pk': meme.id, "title": meme.meme.title})
 
