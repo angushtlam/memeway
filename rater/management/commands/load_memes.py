@@ -26,10 +26,6 @@ class Command(BaseCommand):
 
         pages = options['pages']
 
-        # Start fresh
-        for meme in Meme.objects.all():
-            meme.delete()
-
         # Iterate through all the pages
         for page in range(1, pages+1):
 
@@ -42,7 +38,7 @@ class Command(BaseCommand):
             meme_list_soup = bs4.BeautifulSoup(r, "html.parser")
 
             if meme_list_soup is None:
-                break
+                continue
 
             meme_cells = meme_list_soup.find("table", class_="entry_list").find_all("td")
 
@@ -51,6 +47,11 @@ class Command(BaseCommand):
                 anchor = meme.find("h2").find("a")
 
                 name = anchor.contents[0]
+
+                # Skip if already seen
+                if Meme.objects.filter(title=name).first():
+                    self.stdout.write(self.style.SUCCESS("Skipping meme %s, already had." % name))
+                    continue
 
                 link = anchor["href"]
 
@@ -62,7 +63,7 @@ class Command(BaseCommand):
                 meme_page = bs4.BeautifulSoup(urllib.request.urlopen(url).read(), "html.parser").find("section", class_="bodycopy")
 
                 if meme_page is None:
-                    break
+                    continue
 
                 images = meme_page.find_all("img")
 
@@ -78,7 +79,15 @@ class Command(BaseCommand):
                         m_image = MemeImage.objects.create(meme=meme_obj, url=a)
                         m_image.save()
 
-                print("Successfully created %s meme with %s image(s)." % (meme_obj.title, len(meme_obj.images.all() )))
+                if len(meme_obj.images.all()) == 0:
+
+                    meme_obj.delete()
+
+                    self.stdout.write(self.style.SUCCESS("Skipping meme %s, zero images." % name))
+
+                else:
+
+                    print("Successfully created %s meme with %s image(s)." % (meme_obj.title, len(meme_obj.images.all() )))
 
             print("")
 
